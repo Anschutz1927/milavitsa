@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_start_download"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Начать загрузку" />
+        <item android:title="Макет 3 (расшир.)"
+            android:id="@+id/nav_expandable"
+            android:icon="@drawable/ic_menu_send" />
+        <item android:title="Макет 2 (компакт)"
+            android:id="@+id/nav_compact"
+            android:icon="@drawable/ic_menu_gallery" />
+        <item android:title="Макет 1 (каталог)"
+            android:id="@+id/nav_start_catalog"
+            android:icon="@drawable/ic_menu_slideshow" />
+        <item
+            android:id="@+id/nav_manage"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Tools" />
+    </group>
+
+</menu>

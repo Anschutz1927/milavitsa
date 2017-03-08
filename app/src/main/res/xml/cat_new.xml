@@ -1,0 +1,985 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+-
+- phpMyAdmin XML Dump
+- version 2.11.0
+- http://www.phpmyadmin.net
+-
+- Хост: localhost
+- Время создания: Фев 03 2017 г., 15:55
+- Версия сервера: 5.0.51
+- Версия PHP: 5.2.6-1+lenny16
+-->
+
+<!--
+- База данных: 'milavitsa_rus'
+-->
+<milavitsa_rus>
+  <!-- Таблица  cat_new -->
+    <cat_new>
+        <id>9</id>
+        <name>Basic</name>
+        <image>catalog/classic/kontur/kontur_liniya.png</image>
+        <description>Коллекция моделей с лаконичными линиями и формами выполнена из гладких, комфортных материалов с большим вниманием к конструкции и технологии изготовления изделий.</description>
+        <matherial>catalog/classic/white_.jpg</matherial>
+        <menu_id>55</menu_id>
+        <sort>0</sort>
+        <image_menu>catalog/classic/kontur/kontur_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>10</id>
+        <name>Classic</name>
+        <image>catalog/classic/siluet/siluet_liniya_1_2016.png</image>
+        <description>Комбинированные серии моделей, объединенные единым стилевым решением и композицией материалов, с большим вниманием к конструкции и технологии изготовления изделий.</description>
+        <matherial>catalog/classic/white_.jpg</matherial>
+        <menu_id>55</menu_id>
+        <sort>1</sort>
+        <image_menu>catalog/classic/siluet/siluet_menu_1_2016.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>11</id>
+        <name>Форма</name>
+        <image>catalog/classic/forma/forma_liniya_1_2016.png</image>
+        <description>Модели бюстгалтеров с классическими конструктивными решениями выполнены из современных функциональных материалов, имеют широкий размерный ряд, элегантную цветовую гамму. Обеспечивают комфорт, хорошую поддержку и форму груди.</description>
+        <matherial>catalog/classic/white_.jpg</matherial>
+        <menu_id>55</menu_id>
+        <sort>2</sort>
+        <disable>1</disable>
+        <image_menu>catalog/classic/forma/forma_menu_1_2016.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>12</id>
+        <name>Cotton</name>
+        <image>catalog/classic/cotton/cotton_2_15.png</image>
+        <description>Модели выполнены из высококачественных трикотажных полотен на основе хлопка, характерными свойствами которых являются натуральность материала, мягкость и комфорт.</description>
+        <matherial>catalog/classic/white_.jpg</matherial>
+        <menu_id>55</menu_id>
+        <sort>4</sort>
+        <image_menu>catalog/classic/cotton/cotton_2_15-small.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>13</id>
+        <name>Трикотаж</name>
+        <image>catalog/classic/knitting/trikotaj_liniya_1_2016.png</image>
+        <description>Эластичное трикотажное полотно произведено из натуральных волокон и применятся для создания комфортных изделий для повседневного применения.</description>
+        <matherial>catalog/classic/white_.jpg</matherial>
+        <menu_id>55</menu_id>
+        <sort>6</sort>
+        <disable>1</disable>
+        <image_menu>catalog/classic/knitting/trikotaj_menu_1_2016.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>277</id>
+        <name>Пробуждение</name>
+        <image>catalog/moda/waking/0188_glawnaya.png</image>
+        <description>Выполнена из неэластичной вышивки, неэластичного вышитого трикотажного полотна. Отделка - бантик с подвеской и бантики.</description>
+        <matherial>catalog/moda/waking/choko_jasmin.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>13</sort>
+        <disable>1</disable>
+        <image_menu>catalog/moda/waking/0188_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>279</id>
+        <name>Сакура</name>
+        <image>catalog/moda/sakura/1605_glawnaya.png</image>
+        <description>Выполнена из неэластичной вышивки и эластичного трикотажного набивного полотна. Отделка - бантик с подвеской и бантики.</description>
+        <matherial>catalog/moda/sakura/sakura.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>14</sort>
+        <disable>1</disable>
+        <image_menu>catalog/moda/sakura/1605_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>280</id>
+        <name>Ботаника</name>
+        <image>catalog/moda/botany/1762_glawnaya.png</image>
+        <description>Выполнена из набивного эластичного полотна, неэластичного кружева и эластичного кружевного полотна. Отделка - узкое кружево и бантик.</description>
+        <matherial>catalog/moda/botany/shampanskoe_tuman.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>15</sort>
+        <disable>1</disable>
+        <image_menu>catalog/moda/botany/1762_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>260</id>
+        <name>1 полугодие 2016 года</name>
+        <image>sakura_vesna_2016.png</image>
+        <description>Возрождение - основная тенденция коллекции 1 полугодия.
+Весна – пора любви и цветов, гармонии и красоты, во все времена дарившая вдохновение художникам и поэтам. Весна – как женщина: нежная, вдохновляющая, прекрасная и восхищающая… Вместе с оживлением природы нам хочется остановиться в будничной суете и насладиться солнечным днём, свежей зеленью, дыханием ветра, чарующей музыкой и ароматами.
+   Основной источник вдохновения дизайнеров – природное преображение, весеннее время изменений, когда хочется верить только во всё самое лучшее и радостное. Это возрождение всего живого, обновление сознания и внешнего облика, это цветы, это иллюзии и мечты, это незабываемые утренние рассветы и магия ночи… Все эти внутренние и внешние состояния нашли своё отражение в коллекции  в роскошных цветочных бутонах, золотистой россыпи листьев на кружевах, изысканных цветочных мотивах вышивок. Они прекрасно дополняют чары женского обаяния, помогают женщине в полной мере почувствовать себя непревзойдённой, восхитительной и цветущей.
+
+</description>
+        <matherial>vozrojdenie_3.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>1</sort>
+        <disable>1</disable>
+        <image_menu>sakura_vesna_2016_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>230</id>
+        <name>Утонченная грация</name>
+        <image>catalog/moda/uton_gracia/gracia_linia.png</image>
+        <description>Выполнена из эластичного кружевного полотна, эластичного кружева и эластичного сетчатого полотна. Декор - украшение и атласные бантики.</description>
+        <matherial>catalog/moda/uton_gracia/indigo_rozpviu_shemchyg.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>6</sort>
+        <disable>1</disable>
+        <image_menu>catalog/moda/uton_gracia/gracia_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>274</id>
+        <name>Акварельная иллюзия</name>
+        <image>catalog/moda/akvarelnaya_illusia/illusia_linia.png</image>
+        <description>Выполнена из эластичного сетчатого набивного полотна и эластичного кружева. Декор - кружевные бантики.</description>
+        <matherial>catalog/moda/akvarelnaya_illusia/biryzoviu_rozoviu_30.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>11</sort>
+        <disable>1</disable>
+        <image_menu>catalog/moda/akvarelnaya_illusia/illusia_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>275</id>
+        <name>Время любви</name>
+        <image>catalog/moda/vremya_lubvi/vremya_lubvi_linia.png</image>
+        <description>Выполнена из эластичного сетчатого полотна с блеском и эластичного кружева. Декор - украшение в виде бантика с подвеской.</description>
+        <matherial>catalog/moda/vremya_lubvi/priglush_beliu__nebesnaia_biryza.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>12</sort>
+        <disable>1</disable>
+        <image_menu>catalog/moda/vremya_lubvi/vremya_lubvi_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>286</id>
+        <name>Ван Гог</name>
+        <image>catalog/swimsuit/van_gog/van_gog_linia.png</image>
+        <description>Серия посвящена творчеству Ван Гога, крайне актуальному и трендовому на сегодняшний день. В основу серии положен полный жизненной силы принт!</description>
+        <matherial>catalog/swimsuit/van_gog/van_gog.png</matherial>
+        <menu_id>56</menu_id>
+        <sort>12</sort>
+        <image_menu>catalog/swimsuit/van_gog/van_gog_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>288</id>
+        <name>Мерцание</name>
+        <image>catalog/swimsuit/mercanie/merc_linia.png</image>
+        <description>Серия создана для тех, кто стремится к рафинированному образу с эффектными и точными акцентами! Выразительность силуэта достигается благодаря ясным линиям кроя и лаконичности форм.</description>
+        <matherial>catalog/swimsuit/mercanie/bez_imeni-4.png</matherial>
+        <menu_id>56</menu_id>
+        <sort>13</sort>
+        <image_menu>catalog/swimsuit/mercanie/merc_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>289</id>
+        <name>Лео</name>
+        <image>catalog/swimsuit/leo/leo_linia.png</image>
+        <description>Принты с вариациями леопардовых шкур не перестают быть модными на протяжении многих десятилетий. Изюминка серии &quot;Лео&quot; - высокая детализация изображения леопардовой шкуры на полотне.</description>
+        <matherial>catalog/swimsuit/leo/korichnevyi_nab.png</matherial>
+        <menu_id>56</menu_id>
+        <sort>14</sort>
+        <image_menu>catalog/swimsuit/leo/leo_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>290</id>
+        <name>Движение</name>
+        <image>catalog/swimsuit/dvizhenie/dvizhenie_linia.png</image>
+        <description>Серия &quot;Движение&quot; - это спортивный тренд для полногрудых красавиц. В основе серии - идея стремления к пропорциям песочных часов.</description>
+        <matherial>catalog/swimsuit/dvizhenie/dvijenie.png</matherial>
+        <menu_id>56</menu_id>
+        <sort>15</sort>
+        <image_menu>catalog/swimsuit/dvizhenie/dvizhenie_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>142</id>
+        <name>Пляжная одежда и аксессуары</name>
+        <image>catalog/swimsuit/dop/29.jpg</image>
+        <description></description>
+        <matherial>catalog/swimsuit/dop/color.jpg</matherial>
+        <menu_id>56</menu_id>
+        <sort>9</sort>
+        <disable>1</disable>
+        <image_menu>catalog/swimsuit/dop/29_small.jpg</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>302</id>
+        <name>Империя чувств</name>
+        <image>12.png</image>
+        <description>Выполнена из эластичного трикотажного набивного полотна и эластичной вышивки. Декор - контрастные атласные бантики.</description>
+        <matherial>catalog/moda/imperiya_chuvstv/ognen_rubin_prigkush_bel_ser_grafit_material.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>2</sort>
+        <image_menu>122.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>303</id>
+        <name>Сладостное искушение</name>
+        <image>13.png</image>
+        <description>Выполнена из неэластичного кружевного полотна, эластичного кружева и эластичного сетчатого полотна. Декор - атласный бантик с подвеской и маленькие бантики.</description>
+        <matherial>catalog/moda/sladostnoe_iskushenie/chern_s_krasn_franc_sin_shamp_material.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>14</sort>
+        <disable>1</disable>
+        <image_menu>123.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>305</id>
+        <name>Поэтическое вдохновение</name>
+        <image>catalog/moda/poeticheskoe_vdohnovenie/poet_vdochnovenie.png</image>
+        <description>Выполнена из эластичного трикотажного полотна, неэластичной вышивки и трикотажного сетчатого полотна. Декор - бант с подвеской и бантики.</description>
+        <matherial>catalog/moda/poeticheskoe_vdohnovenie/min_ser_zefir_material.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>15</sort>
+        <disable>1</disable>
+        <image_menu>catalog/moda/poeticheskoe_vdohnovenie/poet_vdochnovenie_linia.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>307</id>
+        <name>1 полугодие 2017 года</name>
+        <image>catalog/moda/magiya_zelaniya_326_524.png</image>
+        <description>Любовь и нежность, страсть и провокация, счастье и умиротворение, грациозность и изысканность – весь этот микс эмоций отражён в различных по образу сериях модной коллекции. Главная  фэшн-тенденция - это внутренний мир женщины, эмоциональное наполнение её души, сплав её чувств и мыслей, яркая креативная глубина различных характеров.
+Актуальные материалы – блестящие однотонные полотна,  витиеватые цветочные проверенные временем принты, нежные биколорные кружева, кружевные полотна крупных распускающихся цветочных лепестков, более прозрачные и более плотные, вышивки с узорами, имитирующими эффект «тату».</description>
+        <matherial>catalog/moda/filosofiya_chuvstv_400_280.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>1</sort>
+        <image_menu>catalog/moda/imperiya_chuvstv_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>301</id>
+        <name>Цветочная симфония</name>
+        <image>catalog/moda/cvetochnaja_symphonia/symphonia_linia.png</image>
+        <description>Выполнена из эластичного трикотажного набивного полотна, эластичного сетчатого полотна и эластичного кружева. Декор - бантики.</description>
+        <matherial>catalog/moda/cvetochnaja_symphonia/antichnaia_roza_ytrenniaia_rosa.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>13</sort>
+        <disable>1</disable>
+        <image_menu>catalog/moda/cvetochnaja_symphonia/symphonia_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>262</id>
+        <name>Прозрачность желаний</name>
+        <image>catalog/moda/transparency_desires/transparency_desires.png</image>
+        <description>Выполнена из меланжевого трикотажного полотна и вышитого ажурного полотна.  </description>
+        <matherial>catalog/moda/transparency_desires/trufel_english-rose.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>23</sort>
+        <disable>1</disable>
+        <image_menu>catalog/moda/transparency_desires/transparency_desires_small.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>247</id>
+        <name>Царственная идиллия</name>
+        <image>catalog/moda/carstvennaja_idillia/carstv_idillia_linia.png</image>
+        <description>Выполнена из эластичного трикотажного набивного полотна и неэластичного кружева. Декор - атласные бантики.</description>
+        <matherial>catalog/moda/carstvennaja_idillia/carstvennaja_idillia.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>4</sort>
+        <image_menu>catalog/moda/carstvennaja_idillia/carstv_idillia_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>44</id>
+        <name>Мама</name>
+        <image>catalog/classic/mother/mama_liniya_1_2016.png</image>
+        <description>Комфортные модели для кормящих женщин выполнены из материалов с высоким содержанием хлопка. Специальная конструкция бюстгалтера с отстегивающейся верхней чашкой обеспечивает удобство при кормлении и необходимую поддержку груди.</description>
+        <matherial>catalog/classic/white_.jpg</matherial>
+        <menu_id>55</menu_id>
+        <sort>4</sort>
+        <disable>1</disable>
+        <image_menu>catalog/classic/mother/mama_menu_1_2016.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>45</id>
+        <name>Грация</name>
+        <image>catalog/classic/correct/correct_2_15.png</image>
+        <description>Линия &quot;Корректирующее белье&quot; специально разработана для мягкой корректировки фигуры.</description>
+        <matherial>catalog/classic/white_.jpg</matherial>
+        <menu_id>55</menu_id>
+        <sort>6</sort>
+        <disable>1</disable>
+        <image_menu>catalog/classic/correct/correct_2_15_small.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>295</id>
+        <name>Дополнительный ассортимент</name>
+        <image>catalog/swimsuit/nastroenie/nastroene_linia.png</image>
+        <description></description>
+        <matherial>catalog/swimsuit/dopolnitelnii_assortiment/pareo.png</matherial>
+        <menu_id>56</menu_id>
+        <sort>21</sort>
+        <image_menu>catalog/swimsuit/nastroenie/nastroenie_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>264</id>
+        <name>Одежда для дома</name>
+        <image>catalog/moda/home_2016_1/1018_1.png</image>
+        <description>Выполнена из однотонного, меланжевого и меланжевого в &quot;полоску&quot; вискозного эластичного полотна</description>
+        <matherial>catalog/moda/home_2016_1/home_linii.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>24</sort>
+        <disable>1</disable>
+        <image_menu>catalog/moda/home_2016_1/1018_1_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>265</id>
+        <name>Драгоценность</name>
+        <image>catalog/moda/jewel/8183_glavnaya.png</image>
+        <description>Выполнена из трикотажного однотонного полотна и кружева</description>
+        <matherial>catalog/moda/jewel/jewel_linii.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>22</sort>
+        <disable>1</disable>
+        <image_menu>catalog/moda/jewel/8183_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>267</id>
+        <name>Нежность</name>
+        <image>catalog/moda/tenderness/8207-8208_glavhaya.png</image>
+        <description>Выполнена из эластичного вискозного полотна и кружева</description>
+        <matherial>catalog/moda/tenderness/lotos_dimka.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>21</sort>
+        <disable>1</disable>
+        <image_menu>catalog/moda/tenderness/8207-8208_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>233</id>
+        <name>Магия желания</name>
+        <image>catalog/moda/magia_zhelania/magia_zhelania.png</image>
+        <description>Выполнена из эластичного кружевного полотна, эластичного узкого кружева и эластичного сетчатого полотна. Декор - подвеска в виде бриллианта и маленькие бантики.</description>
+        <matherial>catalog/moda/magia_zhelania/egeisk_more_nezhno-roz_material.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>1</sort>
+        <image_menu>catalog/moda/magia_zhelania/magia_zhelania_linia.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>268</id>
+        <name>Летний сон</name>
+        <image>catalog/moda/summer_dream/8200_glawnaya.png</image>
+        <description>Выполнена из эластичного вискозного полотна, набивного трикотажного полотна. Отделка - ажурная вышивка.</description>
+        <matherial>catalog/moda/summer_dream/pastel_pastel_nabiwnoi.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>20</sort>
+        <disable>1</disable>
+        <image_menu>catalog/moda/summer_dream/8200_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>269</id>
+        <name>Летняя прогулка</name>
+        <image>catalog/moda/summer_walk/sammer_walk_glaw.png</image>
+        <description>Выполнена из неэластичного кружева и эластичного трикотажного набивного полотна. Отделка - атласные бантики.</description>
+        <matherial>catalog/moda/summer_walk/luch_dym_nektar.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>19</sort>
+        <disable>1</disable>
+        <image_menu>catalog/moda/summer_walk/sammer_walk_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>270</id>
+        <name>Деревенский винтаж</name>
+        <image>catalog/moda/rustic_vintage/1242_glawnaya.png</image>
+        <description>Выполнена из эластичного кружева, эластичного трикотажного жаккардового полотна и эластичного сетчатого полотна. Отделка - атласные бантики.</description>
+        <matherial>catalog/moda/rustic_vintage/losos_vintaj.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>18</sort>
+        <disable>1</disable>
+        <image_menu>catalog/moda/rustic_vintage/1242_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>271</id>
+        <name>Дуновение</name>
+        <image>catalog/moda/breeze/0794_glawnaya.png</image>
+        <description>Выполнена из неэластичной вышивки с ламинированным покрытием, неэластичного трикотажного сетчатого полотна и эластичного трикотажного полотна. Отделка - аппликации с ламинированным покрытием и атласный бант.</description>
+        <matherial>catalog/moda/breeze/sinii_belii_roza.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>16</sort>
+        <disable>1</disable>
+        <image_menu>catalog/moda/breeze/0794_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>238</id>
+        <name>Формула страсти</name>
+        <image>catalog/moda/formula_strasti/formula_strasti_linia.png</image>
+        <description>Выполнена из эластичного трикотажного сетчатого полотна, неэластичного кружева, эластичного трикотажного полотна. Декор - бантики.</description>
+        <matherial>catalog/moda/formula_strasti/formula_strasti.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>3</sort>
+        <image_menu>catalog/moda/formula_strasti/formula_strasti_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>272</id>
+        <name>Сад Руана</name>
+        <image>catalog/moda/garden_of_rouen/0431glawnaya.png</image>
+        <description>Выполнена из эластичного трикотажного полотна и неэластичной вышивки</description>
+        <matherial>catalog/moda/garden_of_rouen/golubika_pastel.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>17</sort>
+        <disable>1</disable>
+        <image_menu>catalog/moda/garden_of_rouen/0431_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>241</id>
+        <name>Оттенки нежности</name>
+        <image>catalog/moda/ottenki_nezhnosti/ottenki_nezh_linia.png</image>
+        <description>Выполнена из эластичного трикотажного полотна, узкого эластичного кружева и сетчатого полотна. Декор - аппликация и бантики.</description>
+        <matherial>catalog/moda/ottenki_nezhnosti/ottenki_nezhnosti.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>5</sort>
+        <image_menu>catalog/moda/ottenki_nezhnosti/ottenki_nezh_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>273</id>
+        <name>Магия </name>
+        <image>catalog/moda/magic_night/1131_glavnaya.png</image>
+        <description>Выполнена из эластичного кружева и неэластичного кружевного полотна. Отделка - бантик из органзы с подвеской и бантики.</description>
+        <matherial>catalog/moda/magic_night/zoloto_vino.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>15</sort>
+        <disable>1</disable>
+        <image_menu>catalog/moda/magic_night/1131_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>243</id>
+        <name>Архитектурная элегантность</name>
+        <image>catalog/moda/architecturn_elegantnost/architecturn_linia.png</image>
+        <description>Выполнена из неэластичного вышитого полотна, неэластичной вышивки, эластичного сетчатого полотна, узкого кружева. Декор - аппликация макраме с камнем Swarowski и атласные бантики..</description>
+        <matherial>catalog/moda/architecturn_elegantnost/rozovoe_derevo___beliu_priglush.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>9</sort>
+        <disable>1</disable>
+        <image_menu>catalog/moda/architecturn_elegantnost/architecturn_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>244</id>
+        <name>Искусство флирта</name>
+        <image>catalog/moda/iskusstvo_flirta/iskusstvo_flieta_linia.png</image>
+        <description>Выполнена из трикотажного полотна, неэластичного вышитого полотна, неэластичной вышивки, эластичного сетчатого полотна.. Декор - бантики.</description>
+        <matherial>catalog/moda/iskusstvo_flirta/korol_golyboi_pomada_priglyshenenno_beliu.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>7</sort>
+        <disable>1</disable>
+        <image_menu>catalog/moda/iskusstvo_flirta/iskusstvo_flirta_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>66</id>
+        <name>Accent</name>
+        <image>catalog/classic/akcent/accent_1_2017_razdel.png</image>
+        <description>Идея коллекции белья &quot;Акцент&quot;– подарить женщинам немного больше, чем просто комфортные модели для каждого дня. Особое внимание уделяется художественному оформлению материалов и отделки.</description>
+        <matherial>catalog/classic/white.jpg</matherial>
+        <menu_id>55</menu_id>
+        <sort>3</sort>
+        <image_menu>catalog/classic/akcent/accent_1_2017_1menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>292</id>
+        <name>Самуи</name>
+        <image>catalog/swimsuit/samui/samui_liniya.png</image>
+        <description>Выполнена из эластичного трикотажного набивного полотна и однотонного эластичного трикотажного полотна. Отделка - декоративный кант.</description>
+        <matherial>catalog/swimsuit/samui/zeleny_nanb.png</matherial>
+        <menu_id>56</menu_id>
+        <sort>18</sort>
+        <disable>1</disable>
+        <image_menu>catalog/swimsuit/samui/samui_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>293</id>
+        <name>Маврикий </name>
+        <image>catalog/swimsuit/mauritius/mawrikii_liniya.png</image>
+        <description>Выполнена из эластичного трикотажного набивного полотна. Отделка - украшение с кристаллом Swarovski.</description>
+        <matherial>catalog/swimsuit/mauritius/rozowii_biryuzovii_nabivnie.png</matherial>
+        <menu_id>56</menu_id>
+        <sort>19</sort>
+        <disable>1</disable>
+        <image_menu>catalog/swimsuit/mauritius/mawrikii_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>294</id>
+        <name>Майами</name>
+        <image>catalog/swimsuit/maiami/maiami_liniya.png</image>
+        <description>Выполнена из эластичных трикотажных однотонных полотен.</description>
+        <matherial>catalog/swimsuit/maiami/malinovii_t_sinii.png</matherial>
+        <menu_id>56</menu_id>
+        <sort>20</sort>
+        <disable>1</disable>
+        <image_menu>catalog/swimsuit/maiami/maiami_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>258</id>
+        <name>Акварельная фантазия</name>
+        <image>catalog/swimsuit/akvarelnaya_fantasia/akvarel_linia.png</image>
+        <description>В основу серии положен сочный и, вместе с тем, очень нежный, выполненный в акварельной технике, цветочный принт.</description>
+        <matherial>catalog/swimsuit/akvarelnaya_fantasia/akvarelnaya_fantasia.png</matherial>
+        <menu_id>56</menu_id>
+        <sort>3</sort>
+        <image_menu>catalog/swimsuit/akvarelnaya_fantasia/akvarel_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>257</id>
+        <name>Эффект обольщения</name>
+        <image>catalog/swimsuit/effect_obolschenia/effect_linia.png</image>
+        <description>В основе этой соблазительной серии - преобладание одного единственного цвета.</description>
+        <matherial>catalog/swimsuit/effect_obolschenia/cherny.png</matherial>
+        <menu_id>56</menu_id>
+        <sort>2</sort>
+        <image_menu>catalog/swimsuit/effect_obolschenia/effect_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>256</id>
+        <name>Абстракция</name>
+        <image>catalog/swimsuit/abstrakcia/abstrakcia_linia.png</image>
+        <description>Серия построена на сочетании выразительной набивки &quot;а-ля Эмилио Пуччи&quot; и двух однотонных полотен-компаньонов, которые дополняют и объединяют принт по цвету в единый целостный образ.</description>
+        <matherial>catalog/swimsuit/abstrakcia/abstrakcia.png</matherial>
+        <menu_id>56</menu_id>
+        <sort>1</sort>
+        <image_menu>catalog/swimsuit/abstrakcia/abstrakcia_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>254</id>
+        <name>Майя</name>
+        <image>catalog/swimsuit/maja/maja_linia.png</image>
+        <description>Серия посвящена культуре племени Майя. Особенностью данной серии является симметричная раскладка рисунка.</description>
+        <matherial>catalog/swimsuit/maja/synyi_nabivnoi.png</matherial>
+        <menu_id>56</menu_id>
+        <sort>8</sort>
+        <image_menu>catalog/swimsuit/maja/maja_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>255</id>
+        <name>Спортивный шик</name>
+        <image>catalog/swimsuit/sport_shik/sport_linia.png</image>
+        <description>&quot;Спортивный шик &quot; - это лаконичная графика в спортивном стиле. Самым важным атрибутом серии является сочетание ярких неоновых расцветок с блоком чёрного.</description>
+        <matherial>catalog/swimsuit/sport_shik/sportivnyi_shik.png</matherial>
+        <menu_id>56</menu_id>
+        <sort>5</sort>
+        <image_menu>catalog/swimsuit/sport_shik/sport_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>282</id>
+        <name>Настроение</name>
+        <image>catalog/swimsuit/nastroenie/nastr_linia.png</image>
+        <description>Серию &quot;Настроение&quot; отличают женственные нотки лекал и броская яркая цветовая гамма. В изделиях сочетается свобода и молодость, а подобный тандем не может оставить равнодушным.</description>
+        <matherial>catalog/swimsuit/nastroenie/nastroenie.png</matherial>
+        <menu_id>56</menu_id>
+        <sort>9</sort>
+        <image_menu>catalog/swimsuit/nastroenie/nastr_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>253</id>
+        <name>Цветные сны</name>
+        <image>catalog/swimsuit/cvetnye_sny/cvetnye_linia.png</image>
+        <description>Серию &quot;Цветные сны&quot; отличает потрясающий принт из стилизованных, выполненных в технике рисунка комиксов, бутонов роз, придающий женскому образу кокетливую игривость.</description>
+        <matherial>catalog/swimsuit/cvetnye_sny/cvetnye_sny.png</matherial>
+        <menu_id>56</menu_id>
+        <sort>7</sort>
+        <image_menu>catalog/swimsuit/cvetnye_sny/cvetnye_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>251</id>
+        <name>Полосатый хит</name>
+        <image>catalog/swimsuit/polosatyi_hit/polosatyi_linia.png</image>
+        <description>Сочетание морской графической полоски в синем и красном цвете с белоснежным, в комбинации с благородным украшением - цепочкой &quot;под золото&quot;, будет смотреться максимально выигрышно на загорелом теле.</description>
+        <matherial>catalog/swimsuit/polosatyi_hit/polosatyi_hit.png</matherial>
+        <menu_id>56</menu_id>
+        <sort>6</sort>
+        <image_menu>catalog/swimsuit/polosatyi_hit/polosatyi_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>291</id>
+        <name>Колибри</name>
+        <image>catalog/swimsuit/colibri/kolibri_liniya.png</image>
+        <description>Выполнена из эластичного трикотажного набивного и однотонного полотна. Отделка - декоративные украшения.</description>
+        <matherial>catalog/swimsuit/colibri/jeltii_chernii_nabivnie.png</matherial>
+        <menu_id>56</menu_id>
+        <sort>17</sort>
+        <disable>1</disable>
+        <image_menu>catalog/swimsuit/colibri/kolibri_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>312</id>
+        <name>Aveline</name>
+        <image>kollazh_11.png</image>
+        <description>Коллекция Aveline</description>
+        <matherial>111_111.png</matherial>
+        <menu_id>55</menu_id>
+        <sort>20</sort>
+        <disable>1</disable>
+        <image_menu></image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>313</id>
+        <name>Alisee</name>
+        <image>111_111.png</image>
+        <description></description>
+        <matherial>muskat_dop.png</matherial>
+        <menu_id>55</menu_id>
+        <sort>11</sort>
+        <disable>1</disable>
+        <image_menu></image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>170</id>
+        <name>Body Art</name>
+        <image>catalog/classic/bodyart/bodyart_liniya_1_2016.png</image>
+        <description>Стремление к совершенству образа свойственно каждой женщине. Новая линия  белья “Body АRT” от Мilavitsa помогает приблизиться к заветной цели:  подчеркнуть восхитительную красоту тела, не нарушая природной гармонии, сохранив легкость и естественность ощущений. </description>
+        <matherial>catalog/classic/b.jpg</matherial>
+        <menu_id>55</menu_id>
+        <sort>9</sort>
+        <image_menu>catalog/classic/bodyart/bodyart_menu_1_2016.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>285</id>
+        <name>Цветочный остров</name>
+        <image>catalog/swimsuit/cvetochnyj_ostrov/cvet_ostrov_linia.png</image>
+        <description>Серия построена на яркой и &quot;вкусной&quot; колористике тропических цветов, выполнена в сочных цветовых решениях.</description>
+        <matherial>catalog/swimsuit/cvetochnyj_ostrov/cvetochnyi_ostrov.png</matherial>
+        <menu_id>56</menu_id>
+        <sort>11</sort>
+        <image_menu>catalog/swimsuit/cvetochnyj_ostrov/cvet_ostrov_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>190</id>
+        <name>Нежный десерт</name>
+        <image>catalog/moda/nezhn_desert/nezhn_desert_linia.png</image>
+        <description>Выполнена из эластичного трикотажного набивного полотна,эластичного узкого кружева и эластичного кружева. Декор - бантик в виде розочки.</description>
+        <matherial>catalog/moda/nezhn_desert/rozovaia_lilia_saharnaia_glazyr.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>10</sort>
+        <disable>1</disable>
+        <image_menu>catalog/moda/nezhn_desert/nezhn_desert_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>283</id>
+        <name>Дыхание странствий</name>
+        <image>catalog/swimsuit/dyhanie_stranstvyi/dyhanie_linia.png</image>
+        <description>Особый интерес в серии представляет возможность перехода от однотонного комплекта к полностью набивному. Также стоит отметить шикарное этническое деревянное украшение-пряжку с разноцветными пластиковыми бусинами.</description>
+        <matherial>catalog/swimsuit/dyhanie_stranstvyi/dychanie_stranstviy.png</matherial>
+        <menu_id>56</menu_id>
+        <sort>10</sort>
+        <image_menu>catalog/swimsuit/dyhanie_stranstvyi/dyhanie_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>252</id>
+        <name>Воительница</name>
+        <image>catalog/swimsuit/voitelnica/voitelnica_linia.png</image>
+        <description>Серия выполнена в актуальной звериной тематике, рисунок набивки повторяет окрас тигра, который в пляжной моде встречается отнюдь не часто, однако является одним из трендовых направлений текущего сезона.</description>
+        <matherial>catalog/swimsuit/voitelnica/zolotystyi_nab.png</matherial>
+        <menu_id>56</menu_id>
+        <sort>4</sort>
+        <image_menu>catalog/swimsuit/voitelnica/voitelnica_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>300</id>
+        <name>Летняя идиллия</name>
+        <image>catalog/moda/letnjaja_idillia/idillia_linia.png</image>
+        <description>Выполнена из эластичного трикотажного полотна, эластичного сетчатого полотна, неэластичной вышивки и эластичного узкого кружева. Декор - бантики.</description>
+        <matherial>catalog/moda/letnjaja_idillia/tryfel_koral_oblako.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>10</sort>
+        <disable>1</disable>
+        <image_menu>catalog/moda/letnjaja_idillia/idillia_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>248</id>
+        <name>Невесомость любви</name>
+        <image>catalog/moda/nevesomost_lubvi/nevesomost_linia.png</image>
+        <description>Выполнена из эластичного кружевного полотна и неэластичной вышивки. Декор - атласные бантики.</description>
+        <matherial>catalog/moda/nevesomost_lubvi/priglush_beliu_cvet_mindalia_nimfa.png</matherial>
+        <menu_id>54</menu_id>
+        <sort>6</sort>
+        <disable>1</disable>
+        <image_menu>catalog/moda/nevesomost_lubvi/nevesomost_menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>315</id>
+        <name>Classic ostatki</name>
+        <image>111_111.png</image>
+        <description></description>
+        <matherial>roz_zhemch_slivoch_s_chern_vecher_sumerki.png</matherial>
+        <menu_id>55</menu_id>
+        <sort>15</sort>
+        <disable>1</disable>
+        <image_menu></image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>318</id>
+        <name>Валентинка</name>
+        <image>tricotazh/valentinka/valentinka_linia.png</image>
+        <description></description>
+        <matherial>tricotazh/valentinka/valentinka.jpg</matherial>
+        <menu_id>83</menu_id>
+        <sort>2</sort>
+        <image_menu>tricotazh/valentinka/valentinka_menu.jpg</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>319</id>
+        <name>Свободное время</name>
+        <image>tricotazh/svobodnoe_vremya/svobodnoe_linia.png</image>
+        <description></description>
+        <matherial>tricotazh/svobodnoe_vremya/sv_vremya.png</matherial>
+        <menu_id>83</menu_id>
+        <sort>1</sort>
+        <image_menu>tricotazh/svobodnoe_vremya/svobodnoe_menu.jpg</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>320</id>
+        <name>Мой ангел</name>
+        <image>tricotazh/moi_angel/angel_linia.png</image>
+        <description></description>
+        <matherial>tricotazh/moi_angel/angel.jpg</matherial>
+        <menu_id>83</menu_id>
+        <sort>3</sort>
+        <image_menu>tricotazh/moi_angel/angel_menu.jpg</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>321</id>
+        <name>Полосатые встречи</name>
+        <image>tricotazh/polosatye_vstrechi/vstrechi_linia.png</image>
+        <description></description>
+        <matherial>tricotazh/polosatye_vstrechi/vstrechi.png</matherial>
+        <menu_id>83</menu_id>
+        <sort>4</sort>
+        <image_menu>tricotazh/polosatye_vstrechi/vstrechi_menu.jpg</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>322</id>
+        <name>Кружевные мотивы</name>
+        <image>tricotazh/kruzhevnye_motivy/motivy_linia.jpg</image>
+        <description></description>
+        <matherial>tricotazh/kruzhevnye_motivy/motivy.jpg</matherial>
+        <menu_id>83</menu_id>
+        <sort>5</sort>
+        <image_menu>tricotazh/kruzhevnye_motivy/motivy_menu.jpg</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>323</id>
+        <name>Relax</name>
+        <image>tricotazh/relax/relax_linia.png</image>
+        <description></description>
+        <matherial>tricotazh/relax/relax.jpg</matherial>
+        <menu_id>83</menu_id>
+        <sort>6</sort>
+        <image_menu>tricotazh/relax/relax_menu.jpg</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>324</id>
+        <name>Комфорт плюс 13</name>
+        <image>tricotazh/komfort_plus/liniya.png</image>
+        <description></description>
+        <matherial>tricotazh/komfort_plus/3_color.png</matherial>
+        <menu_id>83</menu_id>
+        <sort>7</sort>
+        <image_menu>tricotazh/komfort_plus/menu_7152.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>325</id>
+        <name>Комфорт плюс 14</name>
+        <image>tricotazh/komfort_plus_14/linya.png</image>
+        <description></description>
+        <matherial>tricotazh/komfort_plus_14/3_color_ovalo.png</matherial>
+        <menu_id>83</menu_id>
+        <sort>8</sort>
+        <image_menu>tricotazh/komfort_plus_14/menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>326</id>
+        <name>Комфорт плюс 15</name>
+        <image>tricotazh/komfort_plus_15/liniya.png</image>
+        <description></description>
+        <matherial>tricotazh/komfort_plus_15/4_color_oako.png</matherial>
+        <menu_id>83</menu_id>
+        <sort>9</sort>
+        <image_menu>tricotazh/komfort_plus_15/menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>327</id>
+        <name>Панталоны</name>
+        <image>tricotazh/pantalony/liniya.png</image>
+        <description></description>
+        <matherial>tricotazh/pantalony/3_color.png</matherial>
+        <menu_id>83</menu_id>
+        <sort>10</sort>
+        <image_menu>tricotazh/pantalony/menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>328</id>
+        <name>Трусы однотонные</name>
+        <image>tricotazh/trusy/liniay.png</image>
+        <description></description>
+        <matherial>tricotazh/trusy/5_color.png</matherial>
+        <menu_id>83</menu_id>
+        <sort>11</sort>
+        <image_menu>tricotazh/trusy/menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>329</id>
+        <name>Трусы набивные</name>
+        <image>tricotazh/trusy_nab/liniay.png</image>
+        <description></description>
+        <matherial>tricotazh/trusy_nab/2_col.png</matherial>
+        <menu_id>83</menu_id>
+        <sort>12</sort>
+        <image_menu>tricotazh/trusy_nab/menu.png</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+    <cat_new>
+        <id>331</id>
+        <name>Hidalgo 8</name>
+        <image>tricotazh/hidalgo/linia.png</image>
+        <description></description>
+        <matherial>tricotazh/hidalgo/2_color__2_.png</matherial>
+        <menu_id>83</menu_id>
+        <sort>13</sort>
+        <image_menu>tricotazh/hidalgo/menu.jpg</image_menu>
+        <image_2></image_2>
+        <image_3></image_3>
+    </cat_new>
+</milavitsa_rus>
