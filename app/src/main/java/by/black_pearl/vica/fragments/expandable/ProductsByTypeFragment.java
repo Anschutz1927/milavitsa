@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 import by.black_pearl.vica.R;
 import by.black_pearl.vica.activities.MainActivity;
-import by.black_pearl.vica.adapters.AdapterProductType;
+import by.black_pearl.vica.adapters.expandable.AdapterProductType;
 import by.black_pearl.vica.adapters.expandable.SeriesSpinnerAdapter;
 import by.black_pearl.vica.realm_db.ProductDb;
 import by.black_pearl.vica.realm_db.ProductSeriesDb;
@@ -34,12 +34,11 @@ public class ProductsByTypeFragment extends Fragment {
     private int mMenuId = 0;
     private ArrayList<ProductDb> mProductsType1 = new ArrayList<>();
     private ArrayList<ProductDb> mProductsType2 = new ArrayList<>();
-    private ArrayList<ProductDb> mProductsType3 = new ArrayList<>();
-    private ArrayList<ProductDb> mProductsType4 = new ArrayList<>();
     private ViewPager mTopPager;
     private ViewPager mBottomPager;
     private int mId = 0;
     private Spinner mSpinner;
+    private Realm mRealm;
 
     public ProductsByTypeFragment() {
     }
@@ -64,9 +63,8 @@ public class ProductsByTypeFragment extends Fragment {
         if(getArguments() != null) {
             mId = getArguments().getInt(ID);
         }
-        setRetainInstance(true);
-        Realm realm = Realm.getDefaultInstance();
-        mMenuId = realm.where(ProductSeriesDb.class).equalTo("Id", mId).findFirst().getIdMenu();
+        mRealm = Realm.getDefaultInstance();
+        mMenuId = mRealm.where(ProductSeriesDb.class).equalTo("Id", mId).findFirst().getIdMenu();
         loadProducts(mId);
     }
 
@@ -80,6 +78,7 @@ public class ProductsByTypeFragment extends Fragment {
         mTopPager.setPageMargin(6);
         mBottomPager.setClipToPadding(false);
         mBottomPager.setPageMargin(6);
+        mTopPager.addOnPageChangeListener(getOnPageChangeListener());
         loadSpinner();
         return view;
     }
@@ -90,9 +89,33 @@ public class ProductsByTypeFragment extends Fragment {
         MainActivity.ToolbarManager.getToolbarManager().removeView(mSpinner);
     }
 
+    private ViewPager.OnPageChangeListener getOnPageChangeListener() {
+        return new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                int type = ((AdapterProductType) mTopPager.getAdapter()).getType(position);
+                if (type != 1 && mBottomPager.getVisibility() == View.VISIBLE) {
+                    mBottomPager.setVisibility(View.GONE);
+                }
+                else if (type == 1 && mBottomPager.getVisibility() == View.GONE && mProductsType2.size() != 0) {
+                    mBottomPager.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        };
+    }
+
     private void loadSpinner() {
-        this.mSpinner = new Spinner(getContext());
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+        //this.mSpinner = new Spinner(getContext());
+        this.mSpinner = new Spinner(MainActivity.ToolbarManager.getToolbarManager().getThemedContext());
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
         params.gravity = Gravity.RIGHT;
         params.setMargins(0, 0, 0, 10);
@@ -109,35 +132,23 @@ public class ProductsByTypeFragment extends Fragment {
                     mTopPager.setVisibility(View.VISIBLE);
                     AdapterProductType adapter1 = new AdapterProductType(getChildFragmentManager(), mProductsType1);
                     mTopPager.setAdapter(adapter1);
-                    adapter1.notifyDataSetChanged();
                 }
                 else {
                     mTopPager.setVisibility(View.GONE);
                 }
                 if (mProductsType2.size() != 0) {
-                    mBottomPager.setVisibility(View.VISIBLE);
                     mBottomPager.setAdapter(new AdapterProductType(getChildFragmentManager(), mProductsType2));
-                }
-                else {
-                    mBottomPager.setVisibility(View.GONE);
-                }
-                if (mTopPager.getVisibility() == View.VISIBLE || mBottomPager.getVisibility() == View.VISIBLE) {
-                    return;
-                }
-                if(mProductsType3.size() != 0) {
-                    mTopPager.setVisibility(View.VISIBLE);
-                    mTopPager.setAdapter(new AdapterProductType(getChildFragmentManager(), mProductsType3));
-                    return;
-                }
-                if(mProductsType4.size() != 0) {
-                    mTopPager.setVisibility(View.VISIBLE);
-                    mTopPager.setAdapter(new AdapterProductType(getChildFragmentManager(), mProductsType4));
+                    if (((AdapterProductType) mTopPager.getAdapter()).getType(mTopPager.getCurrentItem()) == 1) {
+                        mBottomPager.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        mBottomPager.setVisibility(View.GONE);
+                    }
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
     }
@@ -146,25 +157,29 @@ public class ProductsByTypeFragment extends Fragment {
         mId = (int) id;
         mProductsType1.clear();
         mProductsType2.clear();
-        mProductsType3.clear();
-        mProductsType4.clear();
-        Realm realm = Realm.getDefaultInstance();
-        RealmResults<ProductDb> products = realm.where(ProductDb.class).equalTo("IdRubric", id).findAll();
+        ArrayList<ProductDb> productsType3 = new ArrayList<>();
+        ArrayList<ProductDb> productsType4 = new ArrayList<>();
+        int posType1 = 0;
+        int posType3 = 0;
+        int posType4 = 0;
+        RealmResults<ProductDb> products = mRealm.where(ProductDb.class).equalTo("IdRubric", id).findAll();
         for (ProductDb product : products) {
             switch (product.getType()) {
                 case 1:
-                    mProductsType1.add(product);
+                    mProductsType1.add(posType1, product);
                     break;
                 case 2:
                     mProductsType2.add(product);
                     break;
                 case 3:
-                    mProductsType3.add(product);
+                    productsType3.add(posType3, product);
                     break;
                 case 4:
-                    mProductsType4.add(product);
+                    productsType4.add(posType4, product);
                     break;
             }
         }
+        mProductsType1.addAll(productsType3);
+        mProductsType1.addAll(productsType4);
     }
 }

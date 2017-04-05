@@ -8,7 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import by.black_pearl.vica.R;
 import by.black_pearl.vica.realm_db.ProductDb;
@@ -53,8 +54,9 @@ public class ProductDetailAdapter extends BaseAdapter {
         ((TextView) view.findViewById(R.id.view_product_view_descTextView))
                 .setText("Описание: \n" + mProduct.get(position).getDescription());
         String image_url = "http://www.milavitsa.com/i/photo/" + mProduct.get(position).getImage();
-        Picasso.with(mContext).load(image_url).placeholder(R.drawable.ic_menu_camera).centerInside()
-                .fit().into((ImageView) view.findViewById(R.id.view_product_view_imageView));
+        Glide.with(mContext).load(image_url).diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .fitCenter().placeholder(R.drawable.ic_menu_camera).crossFade()
+                .into((ImageView) view.findViewById(R.id.view_product_view_imageView));
         ((TextView) view.findViewById(R.id.view_product_view_sizesTextView))
                 .setText("Размеры: \n" + mProduct.get(position).getSizes());
         ((TextView) view.findViewById(R.id.view_product_view_idRubricTextView))

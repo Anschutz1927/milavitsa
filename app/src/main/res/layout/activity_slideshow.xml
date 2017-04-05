@@ -1,0 +1,46 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_dark"
+    app:layout_gravity="center"
+    tools:context="by.black_pearl.vica.activities.SlideshowActivity">
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+
+    <ImageSwitcher
+        android:id="@+id/activity_slideshow_imageSwitcher"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/activity_slideshow_image2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            app:srcCompat="@drawable/ic_menu_camera" />
+
+        <ImageView
+            android:id="@+id/activity_slideshow_image1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            app:srcCompat="@drawable/ic_menu_camera" />
+    </ImageSwitcher>
+
+    <FrameLayout
+        android:id="@+id/activity_slideshow_onTouchLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
+</FrameLayout>

@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="by.black_pearl.vica.fragments.UpgradeFragment">
+    tools:context="by.black_pearl.vica.fragments.updater.UpgradeFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -19,13 +19,15 @@
             android:id="@+id/fragment_update_progressBar" />
 
         <TextView
-            android:text="БЕЙ ТРЕВОГУ!!!\nпрогер рукожоп"
+            android:id="@+id/fragment_upgrade_updateTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/fragment_upgrade_updateTextView"
-            android:textStyle="normal|bold"
-            android:textSize="24sp"
-            android:layout_marginTop="15dp" />
+            android:layout_marginTop="15dp"
+            android:text="trying..."
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:textStyle="normal|bold" />
     </LinearLayout>
 
 </FrameLayout>

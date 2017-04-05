@@ -5,7 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import by.black_pearl.vica.R;
 import by.black_pearl.vica.realm_db.ProductDb;
@@ -33,8 +34,8 @@ public class ProductDetailActivity extends AppCompatActivity {
                 String.valueOf(mProduct.getArticle()));
         ImageView imageView = (ImageView) findViewById(R.id.view_product_view_imageView);
         final String image_url = "http://www.milavitsa.com/i/photo/" + mProduct.getImage();
-        Picasso.with(this).load(image_url).placeholder(R.drawable.ic_menu_camera).centerInside()
-                .fit().into(imageView);
+        Glide.with(this).load(image_url).diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .fitCenter().placeholder(R.drawable.ic_menu_camera).crossFade().into(imageView);
         ((TextView) findViewById(R.id.view_product_view_descTextView)).setText("Описание:\n" +
                 mProduct.getDescription());
         ((TextView) findViewById(R.id.view_product_view_sizesTextView)).setText("Размеры:\n" +

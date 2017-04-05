@@ -1,82 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_dual_column"
     android:layout_width="match_parent"
+    android:layout_height="300dp"
     android:layout_margin="5dp"
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
-    app:cardBackgroundColor="#aad8eab0"
-    android:layout_height="300dp">
+    app:cardBackgroundColor="#e6d8c3">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/view_series_cardview_imageviews"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:id="@+id/view_series_cardview_view1">
+            android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/view_series_cardview_image1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:srcCompat="@android:drawable/ic_menu_camera"
-                android:id="@+id/view_series_cardview_image1"
+                android:layout_gravity="top"
+                android:layout_weight="1"
                 android:adjustViewBounds="true"
                 android:padding="5dp"
                 android:scaleType="fitCenter"
-                android:layout_weight="1"
-                android:layout_gravity="top" />
+                app:srcCompat="@android:drawable/ic_menu_camera" />
 
-            <TextView
-                android:text="TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/view_series_cardview_name1"
-                android:layout_gravity="bottom|center_horizontal"
-                android:typeface="serif"
-                android:textColor="@android:color/black"
-                android:textSize="14sp"
-                android:textAlignment="center"
-                android:textAllCaps="true"
-                android:fontFamily="serif-monospace"
-                android:layout_weight="0" />
+            <ImageView
+                android:id="@+id/view_series_cardview_image2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="top"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:padding="5dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@android:drawable/ic_menu_camera" />
+
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/view_series_cardview_textviews"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:id="@+id/view_series_cardview_view2">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:srcCompat="@android:drawable/ic_menu_camera"
-                android:id="@+id/view_series_cardview_image2"
-                android:adjustViewBounds="true"
-                android:padding="5dp"
-                android:scaleType="fitCenter"
-                android:layout_weight="1"
-                android:layout_gravity="top" />
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:orientation="horizontal">
 
             <TextView
-                android:text="TextView"
-                android:layout_width="wrap_content"
+                android:id="@+id/view_series_cardview_name1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/view_series_cardview_name2"
                 android:layout_gravity="bottom|center_horizontal"
-                android:typeface="serif"
-                android:textColor="@android:color/black"
-                android:textSize="14sp"
+                android:layout_weight="1"
+                android:fontFamily="serif-monospace"
+                android:text="TextView"
                 android:textAlignment="center"
                 android:textAllCaps="true"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:typeface="serif" />
+
+            <TextView
+                android:id="@+id/view_series_cardview_name2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_weight="1"
                 android:fontFamily="serif-monospace"
-                android:layout_weight="0" />
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:typeface="serif" />
         </LinearLayout>
     </LinearLayout>
 

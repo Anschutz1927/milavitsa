@@ -24,7 +24,9 @@
                 android:layout_height="match_parent"
                 android:id="@+id/toolbarLayout"
                 android:paddingLeft="10dp"
-                android:paddingRight="20dp">
+                android:paddingStart="10dp"
+                android:paddingRight="20dp"
+                android:paddingEnd="20dp">
 
             </FrameLayout>
 

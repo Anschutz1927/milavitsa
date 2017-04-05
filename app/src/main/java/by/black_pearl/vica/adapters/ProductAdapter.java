@@ -8,7 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import by.black_pearl.vica.R;
 import by.black_pearl.vica.realm_db.ProductDb;
@@ -53,11 +54,12 @@ public class ProductAdapter extends BaseAdapter {
         else {
             view = convertView;
         }
-        ((TextView) view.findViewById(R.id.view_listview_products_descTextView))
+        ((TextView) view.findViewById(R.id.tv_product_model))
                 .setText(mProducts.get(position).getDescription());
         String image_url = "http://www.milavitsa.com/i/photo/" + mProducts.get(position).getImage();
-        Picasso.with(mContext).load(image_url).placeholder(R.drawable.ic_menu_camera).centerInside()
-                .fit().into((ImageView) view.findViewById(R.id.view_listview_products_imageView));
+        Glide.with(mContext).load(image_url).diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .fitCenter().placeholder(R.drawable.ic_menu_camera).crossFade()
+                .into((ImageView) view.findViewById(R.id.iv_product_image));
         return view;
     }
 }

@@ -3,12 +3,16 @@ package by.black_pearl.vica.fragments.expandable;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import by.black_pearl.vica.R;
+import by.black_pearl.vica.activities.MainActivity;
 import by.black_pearl.vica.adapters.expandable.ColectSerExpListViewAdapter;
 
 /**
@@ -17,6 +21,8 @@ import by.black_pearl.vica.adapters.expandable.ColectSerExpListViewAdapter;
  * create an instance of this fragment.
  */
 public class ExpandableCollectionsFragment extends Fragment {
+
+    private TextView mToolbarNameTextView;
 
     public ExpandableCollectionsFragment() {
     }
@@ -28,8 +34,7 @@ public class ExpandableCollectionsFragment extends Fragment {
      * @return A new instance of fragment ExpandableCollectionsFragment.
      */
     public static ExpandableCollectionsFragment newInstance() {
-        ExpandableCollectionsFragment fragment = new ExpandableCollectionsFragment();
-        return fragment;
+        return new ExpandableCollectionsFragment();
     }
 
     @Override
@@ -49,12 +54,24 @@ public class ExpandableCollectionsFragment extends Fragment {
                 }
             }
         });
-
-        setupSpinner();
+        setupToolbar();
         return view;
     }
 
-    private void setupSpinner() {
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        MainActivity.ToolbarManager.getToolbarManager().removeView(mToolbarNameTextView);
     }
+
+    private void setupToolbar() {
+        mToolbarNameTextView = new TextView(getContext());
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.gravity = Gravity.CENTER_VERTICAL;
+        mToolbarNameTextView.setLayoutParams(params);
+        mToolbarNameTextView.setText(R.string.app_name);
+        MainActivity.ToolbarManager.getToolbarManager().addView(mToolbarNameTextView);
+    }
+
 }

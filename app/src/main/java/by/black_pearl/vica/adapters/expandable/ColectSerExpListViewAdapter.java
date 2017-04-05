@@ -2,7 +2,6 @@ package by.black_pearl.vica.adapters.expandable;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.squareup.picasso.NetworkPolicy;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.HashMap;
 
@@ -21,6 +19,7 @@ import by.black_pearl.vica.R;
 import by.black_pearl.vica.activities.MainActivity;
 import by.black_pearl.vica.fragments.expandable.ProductsByTypeFragment;
 import by.black_pearl.vica.realm_db.CollectionDb;
+import by.black_pearl.vica.realm_db.ProductDb;
 import by.black_pearl.vica.realm_db.ProductSeriesDb;
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -99,8 +98,9 @@ public class ColectSerExpListViewAdapter extends BaseExpandableListAdapter {
         ((TextView) convertView.findViewById(R.id.view_collections_cardview_nameCollectionTextView))
                 .setText(mContentCollections.get(groupPosition).getName());
         String image_url = "http://www.milavitsa.com/i/photo/" + mContentCollections.get(groupPosition).getImage();
-        Picasso.with(mContext).load(image_url).placeholder(R.drawable.ic_menu_camera).centerInside()
-                .fit().into((ImageView) convertView.findViewById(R.id.view_collections_cardview_image));
+        Glide.with(mContext).load(image_url).diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .fitCenter().placeholder(R.drawable.ic_menu_camera)
+                .crossFade().into((ImageView) convertView.findViewById(R.id.view_collections_cardview_image));
         return convertView;
     }
 
@@ -112,34 +112,35 @@ public class ColectSerExpListViewAdapter extends BaseExpandableListAdapter {
         }
         int pos1 = 2 * childPosition;
         int pos2 = 2 * childPosition + 1;
-        View view1 = convertView.findViewById(R.id.view_series_cardview_view1);
-        View view2 = convertView.findViewById(R.id.view_series_cardview_view2);
+        View view_imageviews = convertView.findViewById(R.id.view_series_cardview_imageviews);
+        View view_textviews = convertView.findViewById(R.id.view_series_cardview_textviews);
         String image_url = "http://www.milavitsa.com/i/photo/" + mContentSeriesMap
                 .get(mContentCollections.get(groupPosition)).get(pos1).getImage();
-        Picasso.with(mContext).load(image_url).networkPolicy(NetworkPolicy.OFFLINE)
-                .placeholder(R.drawable.ic_menu_camera).centerInside()
-                .fit().into((ImageView) view1.findViewById(R.id.view_series_cardview_image1));
-        ((TextView) view1.findViewById(R.id.view_series_cardview_name1))
-                .setText(mContentSeriesMap.get(mContentCollections.get(groupPosition))
-                        .get(pos1).getName());
-        setOnClickListener(view1, mContentSeriesMap.get(mContentCollections.get(groupPosition)).get(pos1).getId());
-        setOnLongClickListener(view1, mContentSeriesMap.get(mContentCollections.get(groupPosition)).get(pos1).getId());
+        ImageView imageView1 = (ImageView) view_imageviews.findViewById(R.id.view_series_cardview_image1);
+        ImageView imageView2 = (ImageView) view_imageviews.findViewById(R.id.view_series_cardview_image2);
+        TextView textView1 = (TextView) view_textviews.findViewById(R.id.view_series_cardview_name1);
+        TextView textView2 = (TextView) view_textviews.findViewById(R.id.view_series_cardview_name2);
+        Glide.with(mContext).load(image_url).diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .fitCenter().placeholder(R.drawable.ic_menu_camera)
+                .crossFade().into(imageView1);
+        textView1.setText(mContentSeriesMap.get(mContentCollections.get(groupPosition)).get(pos1).getName());
+        setOnClickListener(imageView1, mContentSeriesMap.get(mContentCollections.get(groupPosition)).get(pos1).getId());
+        setOnLongClickListener(imageView1, mContentSeriesMap.get(mContentCollections.get(groupPosition)).get(pos1).getId());
         if(mContentSeriesMap.get(mContentCollections.get(groupPosition)).size() > pos2) {
-            view2.setVisibility(View.VISIBLE);
+            imageView2.setVisibility(View.VISIBLE);
+            textView2.setVisibility(View.VISIBLE);
             image_url = "http://www.milavitsa.com/i/photo/" + mContentSeriesMap
                     .get(mContentCollections.get(groupPosition)).get(pos2).getImage();
-            /*Picasso.with(mContext).load(image_url).placeholder(R.drawable.ic_menu_camera).centerInside()
-                    .fit().into((ImageView) view2.findViewById(R.id.view_series_cardview_image2));*/
-            Glide.with(mContext).load(image_url).fitCenter().placeholder(R.drawable.ic_menu_camera)
-                    .crossFade().into((ImageView) view2.findViewById(R.id.view_series_cardview_image2));
-            ((TextView) view2.findViewById(R.id.view_series_cardview_name2))
-                    .setText(mContentSeriesMap.get(mContentCollections.get(groupPosition))
-                            .get(pos2).getName());
-            setOnClickListener(view2, mContentSeriesMap.get(mContentCollections.get(groupPosition)).get(pos2).getId());
-            setOnLongClickListener(view2, mContentSeriesMap.get(mContentCollections.get(groupPosition)).get(pos2).getId());
+            Glide.with(mContext).load(image_url).diskCacheStrategy(DiskCacheStrategy.RESULT)
+                    .fitCenter().placeholder(R.drawable.ic_menu_camera)
+                    .crossFade().into(imageView2);
+            textView2.setText(mContentSeriesMap.get(mContentCollections.get(groupPosition)).get(pos2).getName());
+            setOnClickListener(imageView2, mContentSeriesMap.get(mContentCollections.get(groupPosition)).get(pos2).getId());
+            setOnLongClickListener(imageView2, mContentSeriesMap.get(mContentCollections.get(groupPosition)).get(pos2).getId());
         }
         else {
-            view2.setVisibility(View.INVISIBLE);
+            imageView2.setVisibility(View.INVISIBLE);
+            textView2.setVisibility(View.INVISIBLE);
         }
         return convertView;
     }
@@ -159,6 +160,7 @@ public class ColectSerExpListViewAdapter extends BaseExpandableListAdapter {
                                     public void onClick(DialogInterface dialog, int which) {
                                         Realm realm = Realm.getDefaultInstance();
                                         realm.beginTransaction();
+                                        realm.where(ProductDb.class).equalTo("IdRubric", id).findAll().deleteAllFromRealm();
                                         realm.where(ProductSeriesDb.class).equalTo("Id", id).findAll().deleteAllFromRealm();
                                         realm.commitTransaction();
                                         fillContentSeriesMap(realm);
@@ -182,9 +184,7 @@ public class ColectSerExpListViewAdapter extends BaseExpandableListAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = ProductsByTypeFragment.newInstance(id);
-                MainActivity.FragmentChanger changer = MainActivity.FragmentChanger.getFragmentChanger();
-                changer.changeFragment(fragment, true);
+                MainActivity.FragmentChanger.getFragmentChanger().changeFragment(ProductsByTypeFragment.newInstance(id), true);
             }
         });
     }

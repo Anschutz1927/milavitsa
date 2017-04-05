@@ -1,24 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item
+        android:id="@+id/nav_start_download"
+        android:icon="@drawable/ic_update"
+        android:title="@string/update_catalog" />
+    <item
+        android:id="@+id/nav_expandable"
+        android:icon="@drawable/ic_view_list"
+        android:title="@string/catalog" />
+    <item
+        android:id="@+id/nav_search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search" />
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_start_download"
-            android:icon="@drawable/ic_menu_send"
-            android:title="Начать загрузку" />
-        <item android:title="Макет 3 (расшир.)"
-            android:id="@+id/nav_expandable"
-            android:icon="@drawable/ic_menu_send" />
-        <item android:title="Макет 2 (компакт)"
             android:id="@+id/nav_compact"
-            android:icon="@drawable/ic_menu_gallery" />
-        <item android:title="Макет 1 (каталог)"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Макет 2 (компакт)"
+            android:visible="false" />
+        <item
             android:id="@+id/nav_start_catalog"
-            android:icon="@drawable/ic_menu_slideshow" />
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Макет 1 (каталог)"
+            android:visible="false" />
         <item
             android:id="@+id/nav_manage"
+            android:enabled="false"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="Tools"
+            android:visible="false" />
     </group>
+    <item
+        android:id="@+id/nav_slide_show"
+        android:icon="@drawable/ic_slideshow"
+        android:title="@string/slide_show" />
 
 </menu>

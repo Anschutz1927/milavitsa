@@ -29,4 +29,8 @@
         <item name="android:background">@color/black_overlay</item>
     </style>
 
+    <style name="AppTheme.SearchTheme" parent="AppTheme">
+        <item name="colorAccent">@color/black_overlay</item>
+    </style>
+
 </resources>

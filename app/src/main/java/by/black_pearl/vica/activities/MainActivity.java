@@ -1,6 +1,7 @@
 package by.black_pearl.vica.activities;
 
-import android.database.DataSetObserver;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -11,19 +12,21 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.SpinnerAdapter;
-import android.widget.TextView;
+
+import java.io.File;
+import java.util.Calendar;
 
 import by.black_pearl.vica.R;
-import by.black_pearl.vica.fragments.CollectionRecyclerFragment;
-import by.black_pearl.vica.fragments.CompactFragment;
-import by.black_pearl.vica.fragments.UpgradeFragment;
+import by.black_pearl.vica.WinRarFileWorker;
+import by.black_pearl.vica.fragments.compact.CompactFragment;
 import by.black_pearl.vica.fragments.expandable.ExpandableCollectionsFragment;
+import by.black_pearl.vica.fragments.search.SearchFragment;
+import by.black_pearl.vica.fragments.simple.CollectionsFragment;
+import by.black_pearl.vica.fragments.updater.UpgradeFragment;
+import by.black_pearl.vica.realm_db.CollectionDb;
 import io.realm.Realm;
 
 public class MainActivity extends AppCompatActivity
@@ -48,100 +51,48 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         initialization();
-        mRealm = Realm.getDefaultInstance();
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        Fragment fragment = ExpandableCollectionsFragment.newInstance();
-        fragmentTransaction.add(R.id.content_main, fragment);
-        //fragmentTransaction.addToBackStack(fragment.getClass().getName());
-        fragmentTransaction.commit();
-
-        //Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        //spinner.setAdapter(getSpinnerAdapter());
+        if (savedInstanceState == null) {
+            mRealm = Realm.getDefaultInstance();
+            if (mRealm.where(CollectionDb.class).findAll().size() > 0) {
+                //if(fileUpdateIsOld()) {
+                //    FragmentChanger.getFragmentChanger().addFragmentOnStart(OstDownloaderFragment.newInstance());
+                // }
+                //else {
+                FragmentChanger.getFragmentChanger().addFragmentOnStart(ExpandableCollectionsFragment.newInstance());
+                //}
+            } else {
+                FragmentChanger.getFragmentChanger().addFragmentOnStart(UpgradeFragment.newInstance());
+            }
+        }
     }
 
     private void initialization() {
-        Realm.init(this);
+        Realm.init(getApplicationContext());
         FragmentChanger.init(getSupportFragmentManager());
-        ToolbarManager.init(this);
+        Context themedContext = getSupportActionBar().getThemedContext() != null ?
+                getSupportActionBar().getThemedContext() : getBaseContext();
+        ToolbarManager.init(themedContext, (Toolbar) findViewById(R.id.toolbar));
     }
 
-    private SpinnerAdapter getSpinnerAdapter() {
-        return new SpinnerAdapter() {
-
-            public final String[] items = new String[] {"Коллекции", "Серии", "Продукты"};
-
-            @Override
-            public View getDropDownView(int position, View convertView, ViewGroup parent) {
-                if (convertView == null) {
-                    LayoutInflater vi = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-                    convertView = vi.inflate(android.R.layout.simple_spinner_dropdown_item, parent, false);
-                }
-                ((TextView) convertView).setText(items[position].toString());
-                return convertView;
+    private boolean fileUpdateIsOld() {
+        File unraredFile = WinRarFileWorker.getUnraredXlsFile(getCacheDir(), null);
+        if(unraredFile != null) {
+            int year = 2;
+            int month = 1;
+            int day = 0;
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(System.currentTimeMillis());
+            int[] todayDdMmYyyy = {calendar.get(Calendar.DATE), calendar.get(Calendar.MONTH), calendar.get(Calendar.YEAR)};
+            calendar.setTimeInMillis(unraredFile.lastModified());
+            int[] fileDdMmYyyy = {calendar.get(Calendar.DATE), calendar.get(Calendar.MONTH), calendar.get(Calendar.YEAR)};
+            if(todayDdMmYyyy[year] > fileDdMmYyyy[year] ||
+                    todayDdMmYyyy[month] > fileDdMmYyyy[month] ||
+                    todayDdMmYyyy[day] > fileDdMmYyyy[day]) {
+                return true;
             }
-
-            @Override
-            public void registerDataSetObserver(DataSetObserver observer) {
-
-            }
-
-            @Override
-            public void unregisterDataSetObserver(DataSetObserver observer) {
-
-            }
-
-            @Override
-            public int getCount() {
-                return items.length;
-            }
-
-            @Override
-            public Object getItem(int position) {
-                return items[position];
-            }
-
-            @Override
-            public long getItemId(int position) {
-                return position;
-            }
-
-            @Override
-            public boolean hasStableIds() {
-                return false;
-            }
-
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                TextView textView = (TextView) View.inflate(MainActivity.this, android.R.layout.simple_spinner_item, null);
-                textView.setText(items[position].toString());
-                return textView;
-            }
-
-            @Override
-            public int getItemViewType(int position) {
-                return 0;
-            }
-
-            @Override
-            public int getViewTypeCount() {
-                return 0;
-            }
-
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-        };
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -163,25 +114,26 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        //clearBackStack();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        Fragment fragment;
         switch (item.getItemId()) {
             case R.id.nav_start_download:
-                fragmentTransaction.replace(R.id.content_main, UpgradeFragment.newInstance());
-                break;
-            case R.id.nav_start_catalog:
-                fragment = CollectionRecyclerFragment.newInstance();
-                fragmentTransaction.replace(R.id.content_main, fragment);
-                break;
-            case R.id.nav_compact:
-                fragment = CompactFragment.newInstance();
-                FragmentChanger changer = FragmentChanger.getFragmentChanger();
-                changer.changeFragment(fragment, true);
+                FragmentChanger.getFragmentChanger().addFragmentOnStart(UpgradeFragment.newInstance());
                 break;
             case R.id.nav_expandable:
-                fragment = ExpandableCollectionsFragment.newInstance();
-                FragmentChanger.getFragmentChanger().changeFragment(fragment, true);
+                FragmentChanger.getFragmentChanger().addFragmentOnStart(ExpandableCollectionsFragment.newInstance());
+                break;
+            case R.id.nav_search:
+                FragmentChanger.getFragmentChanger().clearBackStack();
+                FragmentChanger.getFragmentChanger().changeFragment(SearchFragment.newInstance(), true);
+                break;
+            case R.id.nav_slide_show:
+                startActivity(new Intent(this, SlideshowActivity.class));
+                break;
+            case R.id.nav_compact:
+                FragmentChanger.getFragmentChanger().addFragmentOnStart(CompactFragment.newInstance());
+                break;
+            case R.id.nav_start_catalog:
+                FragmentChanger.getFragmentChanger().addFragmentOnStart(CollectionsFragment.newInstance());
                 break;
         }
         fragmentTransaction.commit();
@@ -192,32 +144,42 @@ public class MainActivity extends AppCompatActivity
     }
 
     public static class FragmentChanger {
+        private static final String BACKSTACK = "backstack";
         private static FragmentChanger changer;
         private final FragmentManager mManager;
+        private Fragment mStartFragment;
 
         private FragmentChanger(FragmentManager fragmentManager) {
             this.mManager = fragmentManager;
         }
 
-        public void changeFragment(Fragment fragment, boolean isAddToBackStack) {
-            FragmentTransaction fragmentTransaction = mManager.beginTransaction();
-            if(isAddToBackStack) {
-                fragmentTransaction.addToBackStack(fragment.getClass().getName());
+        public void addFragmentOnStart(Fragment startFragment) {
+            if(mStartFragment != null) {
+                clearBackStack();
+                mManager.beginTransaction().remove(mStartFragment).commit();
             }
+            this.mStartFragment = startFragment;
+            mManager.beginTransaction().add(R.id.content_main, startFragment).commit();
+        }
+
+        public void changeFragment(Fragment fragment, boolean addToBackStack) {
+            FragmentTransaction fragmentTransaction = mManager.beginTransaction();
             fragmentTransaction.replace(R.id.content_main, fragment);
+            if(addToBackStack) {
+                fragmentTransaction.addToBackStack(BACKSTACK);
+            }
             fragmentTransaction.commit();
         }
 
         private void clearBackStack() {
-            for (int i = 0; i < mManager.getBackStackEntryCount(); i++) {
-                FragmentManager.BackStackEntry first = mManager.getBackStackEntryAt(0);
-                mManager.popBackStack(first.getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                mManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            int n = mManager.getBackStackEntryCount();
+            for (int i = 0; i < n; i++) {
+                mManager.popBackStackImmediate();
             }
         }
 
-        private static void init(FragmentManager fragmentManager) {
-            changer = new FragmentChanger(fragmentManager);
+        private static void init(FragmentManager supportFragmentManager) {
+            changer = new FragmentChanger(supportFragmentManager);
         }
 
         public static FragmentChanger getFragmentChanger() {
@@ -228,9 +190,11 @@ public class MainActivity extends AppCompatActivity
     public static class ToolbarManager {
         private static ToolbarManager toolbarManager;
         private final FrameLayout mToolbarLayout;
+        private final Context mContext;
 
-        private ToolbarManager(Toolbar toolbar) {
+        private ToolbarManager(Context themedContext, Toolbar toolbar) {
             mToolbarLayout = (FrameLayout) toolbar.findViewById(R.id.toolbarLayout);
+            mContext = themedContext;
         }
 
         public void addView(View view) {
@@ -241,12 +205,20 @@ public class MainActivity extends AppCompatActivity
             mToolbarLayout.removeView(view);
         }
 
-        public static void init(MainActivity activity) {
-            toolbarManager = new ToolbarManager((Toolbar) activity.findViewById(R.id.toolbar));
+        public static void init(Context themedContext, Toolbar toolbar) {
+            toolbarManager = new ToolbarManager(themedContext, toolbar);
         }
 
         public static ToolbarManager getToolbarManager() {
             return toolbarManager;
+        }
+
+        public Context getThemedContext() {
+            return toolbarManager.mContext;
+        }
+
+        public void removeViews() {
+            mToolbarLayout.removeAllViews();
         }
     }
 }
