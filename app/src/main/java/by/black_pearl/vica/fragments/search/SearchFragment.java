@@ -28,7 +28,7 @@ import java.util.ArrayList;
 
 import by.black_pearl.vica.R;
 import by.black_pearl.vica.activities.MainActivity;
-import by.black_pearl.vica.adapters.FindAdapter;
+import by.black_pearl.vica.adapters.search.FindAdapter;
 import by.black_pearl.vica.realm_db.ConstructionTypesDb;
 import by.black_pearl.vica.realm_db.ConstructionsDb;
 import by.black_pearl.vica.realm_db.ModelIrrhDb;

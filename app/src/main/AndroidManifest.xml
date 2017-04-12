@@ -24,7 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.ProductDetailActivity" />
         <activity
             android:name=".activities.FullscreenImageActivity"
             android:theme="@style/FullscreenTheme" />
@@ -39,6 +38,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="by.black_pearl.vica.activities.MainActivity" />
         </activity>
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".activities.MainActivity"
+            tools:targetApi="jelly_bean">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="by.black_pearl.vica.activities.MainActivity" />
+        </activity>
+        <activity android:name=".activities.TempSettingsActivity" />
     </application>
 
 </manifest>

@@ -24,7 +24,7 @@ public class FullscreenImageActivity extends AppCompatActivity {
         String url = getIntent().getExtras().getString(IMAGE_URL);
         PhotoView photoView = (PhotoView) findViewById(R.id.activity_fullscreen_photoView);
         Glide.with(this).load(url).diskCacheStrategy(DiskCacheStrategy.RESULT)
-                .fitCenter().placeholder(R.drawable.ic_menu_camera)
+                .fitCenter().placeholder(android.R.drawable.ic_menu_camera)
                 .crossFade().into(photoView);
     }
 }

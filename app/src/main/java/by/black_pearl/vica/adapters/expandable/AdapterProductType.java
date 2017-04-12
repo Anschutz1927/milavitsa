@@ -90,11 +90,11 @@ public class AdapterProductType extends FragmentStatePagerAdapter {
             TextView article = (TextView) view.findViewById(R.id.view_by_type_productArticle);
             ImageView imageColors = (ImageView) view.findViewById(R.id.view_by_type_colorsImage);
             Glide.with(getContext()).load(imageUrl).diskCacheStrategy(DiskCacheStrategy.RESULT)
-                    .fitCenter().placeholder(R.drawable.ic_menu_camera)
+                    .fitCenter().placeholder(android.R.drawable.ic_menu_camera)
                     .crossFade().into(imageProduct);
             article.setText(this.article);
             Glide.with(getContext()).load(colorsUrl).diskCacheStrategy(DiskCacheStrategy.RESULT)
-                    .fitCenter().placeholder(R.drawable.ic_menu_camera).crossFade().into(imageColors);
+                    .fitCenter().placeholder(android.R.drawable.ic_menu_camera).crossFade().into(imageColors);
             view.setOnClickListener(getOnItemClickListener());
             return view;
         }

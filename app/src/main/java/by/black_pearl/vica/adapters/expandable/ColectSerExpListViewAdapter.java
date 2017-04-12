@@ -99,7 +99,7 @@ public class ColectSerExpListViewAdapter extends BaseExpandableListAdapter {
                 .setText(mContentCollections.get(groupPosition).getName());
         String image_url = "http://www.milavitsa.com/i/photo/" + mContentCollections.get(groupPosition).getImage();
         Glide.with(mContext).load(image_url).diskCacheStrategy(DiskCacheStrategy.RESULT)
-                .fitCenter().placeholder(R.drawable.ic_menu_camera)
+                .fitCenter().placeholder(android.R.drawable.ic_menu_camera)
                 .crossFade().into((ImageView) convertView.findViewById(R.id.view_collections_cardview_image));
         return convertView;
     }
@@ -121,7 +121,7 @@ public class ColectSerExpListViewAdapter extends BaseExpandableListAdapter {
         TextView textView1 = (TextView) view_textviews.findViewById(R.id.view_series_cardview_name1);
         TextView textView2 = (TextView) view_textviews.findViewById(R.id.view_series_cardview_name2);
         Glide.with(mContext).load(image_url).diskCacheStrategy(DiskCacheStrategy.RESULT)
-                .fitCenter().placeholder(R.drawable.ic_menu_camera)
+                .fitCenter().placeholder(android.R.drawable.ic_menu_camera)
                 .crossFade().into(imageView1);
         textView1.setText(mContentSeriesMap.get(mContentCollections.get(groupPosition)).get(pos1).getName());
         setOnClickListener(imageView1, mContentSeriesMap.get(mContentCollections.get(groupPosition)).get(pos1).getId());
@@ -132,7 +132,7 @@ public class ColectSerExpListViewAdapter extends BaseExpandableListAdapter {
             image_url = "http://www.milavitsa.com/i/photo/" + mContentSeriesMap
                     .get(mContentCollections.get(groupPosition)).get(pos2).getImage();
             Glide.with(mContext).load(image_url).diskCacheStrategy(DiskCacheStrategy.RESULT)
-                    .fitCenter().placeholder(R.drawable.ic_menu_camera)
+                    .fitCenter().placeholder(android.R.drawable.ic_menu_camera)
                     .crossFade().into(imageView2);
             textView2.setText(mContentSeriesMap.get(mContentCollections.get(groupPosition)).get(pos2).getName());
             setOnClickListener(imageView2, mContentSeriesMap.get(mContentCollections.get(groupPosition)).get(pos2).getId());

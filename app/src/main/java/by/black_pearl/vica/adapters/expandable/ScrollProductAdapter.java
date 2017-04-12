@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import by.black_pearl.vica.fragments.simple.ProductFragment;
+import by.black_pearl.vica.fragments.expandable.ProductFragment;
 import by.black_pearl.vica.realm_db.ProductDb;
 import io.realm.Realm;
 import io.realm.RealmResults;

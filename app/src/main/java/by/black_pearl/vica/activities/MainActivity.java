@@ -3,6 +3,7 @@ package by.black_pearl.vica.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,15 +17,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.backendless.Backendless;
+
 import java.io.File;
 import java.util.Calendar;
 
 import by.black_pearl.vica.R;
 import by.black_pearl.vica.WinRarFileWorker;
-import by.black_pearl.vica.fragments.compact.CompactFragment;
 import by.black_pearl.vica.fragments.expandable.ExpandableCollectionsFragment;
 import by.black_pearl.vica.fragments.search.SearchFragment;
-import by.black_pearl.vica.fragments.simple.CollectionsFragment;
 import by.black_pearl.vica.fragments.updater.UpgradeFragment;
 import by.black_pearl.vica.realm_db.CollectionDb;
 import io.realm.Realm;
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Realm mRealm;
+    private static final String sBackendlessAppId = "C68F0999-9946-4158-FF9F-D3E41DCBFD00";
+    private static final String sBackendlessKey = "AE240C33-A9D3-AA40-FF5C-ED1B88588700";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +47,8 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        //drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -68,6 +72,7 @@ public class MainActivity extends AppCompatActivity
 
     private void initialization() {
         Realm.init(getApplicationContext());
+        Backendless.initApp(this, sBackendlessAppId, sBackendlessKey);
         FragmentChanger.init(getSupportFragmentManager());
         Context themedContext = getSupportActionBar().getThemedContext() != null ?
                 getSupportActionBar().getThemedContext() : getBaseContext();
@@ -85,12 +90,9 @@ public class MainActivity extends AppCompatActivity
             int[] todayDdMmYyyy = {calendar.get(Calendar.DATE), calendar.get(Calendar.MONTH), calendar.get(Calendar.YEAR)};
             calendar.setTimeInMillis(unraredFile.lastModified());
             int[] fileDdMmYyyy = {calendar.get(Calendar.DATE), calendar.get(Calendar.MONTH), calendar.get(Calendar.YEAR)};
-            if(todayDdMmYyyy[year] > fileDdMmYyyy[year] ||
+            return todayDdMmYyyy[year] > fileDdMmYyyy[year] ||
                     todayDdMmYyyy[month] > fileDdMmYyyy[month] ||
-                    todayDdMmYyyy[day] > fileDdMmYyyy[day]) {
-                return true;
-            }
-            return false;
+                    todayDdMmYyyy[day] > fileDdMmYyyy[day];
         }
         return true;
     }
@@ -113,7 +115,7 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         switch (item.getItemId()) {
             case R.id.nav_start_download:
@@ -129,11 +131,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_slide_show:
                 startActivity(new Intent(this, SlideshowActivity.class));
                 break;
-            case R.id.nav_compact:
-                FragmentChanger.getFragmentChanger().addFragmentOnStart(CompactFragment.newInstance());
-                break;
-            case R.id.nav_start_catalog:
-                FragmentChanger.getFragmentChanger().addFragmentOnStart(CollectionsFragment.newInstance());
+            case R.id.nav_settings:
+                //startActivity(new Intent(this, SettingsActivity.class));
+                startActivity(new Intent(this, TempSettingsActivity.class));
                 break;
         }
         fragmentTransaction.commit();
@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity
             mToolbarLayout.removeView(view);
         }
 
-        public static void init(Context themedContext, Toolbar toolbar) {
+        static void init(Context themedContext, Toolbar toolbar) {
             toolbarManager = new ToolbarManager(themedContext, toolbar);
         }
 

@@ -1,4 +1,4 @@
-package by.black_pearl.vica.adapters;
+package by.black_pearl.vica.adapters.search;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
@@ -55,19 +55,17 @@ public class FindAdapter extends RecyclerView.Adapter<FindAdapter.Holder> {
         int pos2 = 2 * position + 1;
         String image_url = "http://www.milavitsa.com/i/photo/" + mProducts.get(pos1).getImage();
         Glide.with(mContext).load(image_url).diskCacheStrategy(DiskCacheStrategy.RESULT)
-                .fitCenter().placeholder(R.drawable.ic_menu_camera)
+                .fitCenter().placeholder(android.R.drawable.ic_menu_camera)
                 .crossFade().into(holder.imageView1);
         holder.textView1.setText(mProducts.get(pos1).getArticle());
-        //setOnClickListener(imageView1, mContentSeriesMap.get(mContentCollections.get(groupPosition)).get(pos1).getId());
         if(mProducts.size() > pos2) {
             holder.imageView2.setVisibility(View.VISIBLE);
             holder.textView2.setVisibility(View.VISIBLE);
             image_url = "http://www.milavitsa.com/i/photo/" + mProducts.get(pos2).getImage();
             Glide.with(mContext).load(image_url).diskCacheStrategy(DiskCacheStrategy.RESULT)
-                    .fitCenter().placeholder(R.drawable.ic_menu_camera)
+                    .fitCenter().placeholder(android.R.drawable.ic_menu_camera)
                     .crossFade().into(holder.imageView2);
             holder.textView2.setText(mProducts.get(pos2).getArticle());
-            //setOnClickListener(imageView2, mContentSeriesMap.get(mContentCollections.get(groupPosition)).get(pos2).getId());
         }
         else {
             holder.imageView2.setVisibility(View.INVISIBLE);
@@ -81,13 +79,13 @@ public class FindAdapter extends RecyclerView.Adapter<FindAdapter.Holder> {
         return (size / 2) + (size % 2);
     }
 
-    public class Holder extends RecyclerView.ViewHolder {
+    class Holder extends RecyclerView.ViewHolder {
         private final ImageView imageView1;
         private final ImageView imageView2;
         private final TextView textView1;
         private final TextView textView2;
 
-        public Holder(View itemView) {
+        Holder(View itemView) {
             super(itemView);
             CardView.LayoutParams params =
                     new CardView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -100,7 +98,7 @@ public class FindAdapter extends RecyclerView.Adapter<FindAdapter.Holder> {
             imageView2.setOnClickListener(getClickListener(1));
         }
 
-        public View.OnClickListener getClickListener(final int numberOfView) {
+        View.OnClickListener getClickListener(final int numberOfView) {
             return new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

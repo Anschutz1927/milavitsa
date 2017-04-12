@@ -1,6 +1,10 @@
 package by.black_pearl.vica.realm_db;
 
+import java.util.ArrayList;
+
+import io.realm.Realm;
 import io.realm.RealmObject;
+import io.realm.RealmResults;
 import io.realm.annotations.Index;
 
 /**
@@ -47,5 +51,14 @@ public class ModelIrrhDb extends RealmObject {
 
     public void setConstructionType(String constructionType) {
         this.construction_type = constructionType;
+    }
+
+    public static ArrayList<String> getItemSizesList(Realm realm, int article) {
+        RealmResults<ModelIrrhDb> sizesResult = realm.where(ModelIrrhDb.class).equalTo("model", article).findAll();
+        ArrayList<String> sizesList = new ArrayList<>();
+        for (ModelIrrhDb irrhDb : sizesResult) {
+            sizesList.add(irrhDb.getSize());
+        }
+        return sizesList;
     }
 }
