@@ -13,7 +13,9 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import by.black_pearl.vica.R;
+import by.black_pearl.vica.parsers.ColorModelSizeParser;
 import by.black_pearl.vica.parsers.ModelIrrhParser;
+import by.black_pearl.vica.realm_db.ColorModelSizeDb;
 
 /**
  * Created by BLACK_Pearl.
@@ -43,12 +45,16 @@ public class SaveModelIrrh extends AsyncTask <Void, String, Void> {
 
     @Override
     protected Void doInBackground(Void... params) {
-        ModelIrrhParser.IrrhCallback parserCallback = getParserCalback();
-        ModelIrrhParser modelIrrhParser = new ModelIrrhParser(parserCallback);
-        InputSource source = new InputSource(mResources.openRawResource(R.raw.modelrrh1));
-        parseXml(source, modelIrrhParser);
-        source = new InputSource(mResources.openRawResource(R.raw.modelrrh2));
-        parseXml(source, modelIrrhParser);
+        //ModelIrrhParser.IrrhCallback parserCallback = getParserCalback();
+        //ModelIrrhParser modelIrrhParser = new ModelIrrhParser(parserCallback);
+        ColorModelSizeParser.ColorModelSizeCallback parserCallback = getParserCalback();
+        ColorModelSizeParser colorModelSizeParser = new ColorModelSizeParser(parserCallback);
+        //InputSource source = new InputSource(mResources.openRawResource(R.raw.modelrrh1));
+        InputSource source = new InputSource(mResources.openRawResource(R.raw.colormodelsize));
+        //parseXml(source, modelIrrhParser);
+        parseXml(source, colorModelSizeParser);
+        //source = new InputSource(mResources.openRawResource(R.raw.modelrrh2));
+        //parseXml(source, modelIrrhParser);
         return null;
     }
 
@@ -96,8 +102,8 @@ public class SaveModelIrrh extends AsyncTask <Void, String, Void> {
         }
     }
 
-    public ModelIrrhParser.IrrhCallback getParserCalback() {
-        return new ModelIrrhParser.IrrhCallback() {
+    public ColorModelSizeParser.ColorModelSizeCallback getParserCalback() {
+        return new ColorModelSizeParser.ColorModelSizeCallback() {
             @Override
             public void onStartDocument() {
             }
