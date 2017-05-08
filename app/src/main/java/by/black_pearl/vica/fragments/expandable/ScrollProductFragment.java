@@ -51,7 +51,7 @@ public class ScrollProductFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        MainActivity.ToolbarManager.getToolbarManager().addView(mToolbarTv);
+        MainActivity.ToolbarManager.getToolbarManager().setView(mToolbarTv);
         View view = inflater.inflate(R.layout.fragment_scroll_product, container, false);
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.fragment_scroll_product_viewPager);
         int id = 0;

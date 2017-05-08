@@ -8,6 +8,9 @@ import io.realm.annotations.Index;
  */
 
 public class ColorsDb extends RealmObject {
+    public static final String COLUMN_ID = "id";
+    public static final String COLUMN_COLOR= "color";
+
     @Index
     private int id;
     private String color;

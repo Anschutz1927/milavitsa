@@ -8,6 +8,9 @@ import io.realm.annotations.Index;
  */
 
 public class ConstructionsDb extends RealmObject {
+    public static final String COLUMN_ID = "id";
+    public static final String COLUMN_CONSTRUCTION = "construction";
+
     @Index
     private int id;
     private String construction;

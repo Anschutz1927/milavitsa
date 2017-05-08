@@ -3,7 +3,6 @@ package by.black_pearl.vica.fragments.search;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -19,7 +18,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -29,14 +27,14 @@ import java.util.ArrayList;
 import by.black_pearl.vica.R;
 import by.black_pearl.vica.activities.MainActivity;
 import by.black_pearl.vica.adapters.search.FindAdapter;
+import by.black_pearl.vica.realm_db.ColorsDb;
 import by.black_pearl.vica.realm_db.ConstructionTypesDb;
 import by.black_pearl.vica.realm_db.ConstructionsDb;
-import by.black_pearl.vica.realm_db.ModelIrrhDb;
 import by.black_pearl.vica.realm_db.ProductDb;
+import by.black_pearl.vica.realm_db.ProductsParamsDb;
 import by.black_pearl.vica.realm_db.SizesDb;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
-import io.realm.RealmList;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
@@ -45,10 +43,11 @@ public class SearchFragment extends Fragment {
     private FindAdapter mFindAdapter;
     private Realm mRealm;
     private ArrayList<String> mSizes;
+    private ArrayList<String> mColors;
     private ArrayList<String> mConstructions;
     private ArrayList<String> mConstructionTypes;
     private CoordinatorLayout mContainerCl;
-    private TextView mToolbarTv;
+    private View mToolbarParentView;
 
     public SearchFragment() {
     }
@@ -66,14 +65,20 @@ public class SearchFragment extends Fragment {
         this.mFindAdapter = new FindAdapter(getContext());
         mRealm = Realm.getDefaultInstance();
         mSizes = new ArrayList<>();
+        mColors = new ArrayList<>();
         mConstructions = new ArrayList<>();
         mConstructionTypes = new ArrayList<>();
         RealmResults<SizesDb> sizesResult = mRealm.where(SizesDb.class).findAll();
+        RealmResults<ColorsDb> colorsResult = mRealm.where(ColorsDb.class).findAll();
         RealmResults<ConstructionsDb> constructionsResult = mRealm.where(ConstructionsDb.class).findAll();
         RealmResults<ConstructionTypesDb> constructionTypesResult = mRealm.where(ConstructionTypesDb.class).findAll();
         mSizes.add("Выбрать размер");
         for (SizesDb sizesDb : sizesResult) {
             mSizes.add(sizesDb.getSize());
+        }
+        mColors.add("Выбрать цвет");
+        for (ColorsDb colorsDb : colorsResult) {
+            mColors.add(colorsDb.getColor());
         }
         mConstructions.add("Выбрать конструкцию");
         for (ConstructionsDb constructionsDb : constructionsResult) {
@@ -81,7 +86,7 @@ public class SearchFragment extends Fragment {
         }
         mConstructionTypes.add("Выбрать тип конструкции");
         for (ConstructionTypesDb constructionsTypesDb : constructionTypesResult) {
-            mConstructionTypes.add(constructionsTypesDb.getConstructionType());
+            mConstructionTypes.add(constructionsTypesDb.getConstruction_type());
         }
         setupToolbarTv();
     }
@@ -89,12 +94,12 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        MainActivity.ToolbarManager.getToolbarManager().addView(mToolbarTv);
+        MainActivity.ToolbarManager.getToolbarManager().setView(mToolbarParentView);
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         mContainerCl = (CoordinatorLayout) view.findViewById(R.id.cl_container);
         RecyclerView findRv = (RecyclerView) view.findViewById(R.id.rv_find);
         findRv.setLayoutManager(new LinearLayoutManager(getContext()));
-        EditText searchModel = (EditText) view.findViewById(R.id.et_search_model);
+        final EditText searchModel = (EditText) view.findViewById(R.id.et_search_model);
         searchModel.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -106,25 +111,40 @@ public class SearchFragment extends Fragment {
                 return false;
             }
         });
-        Spinner searchSize = (Spinner) view.findViewById(R.id.spnr_size);
-        Spinner searchConstruction = (Spinner) view.findViewById(R.id.spnr_constr);
-        Spinner searchConstrType = (Spinner) view.findViewById(R.id.spnr_constr_type);
+        final Spinner searchSize = (Spinner) view.findViewById(R.id.spnr_size);
+        final Spinner searchColor = (Spinner) view.findViewById(R.id.spnr_color);
+        final Spinner searchConstruction = (Spinner) view.findViewById(R.id.spnr_constr);
+        final Spinner searchConstrType = (Spinner) view.findViewById(R.id.spnr_constr_type);
         searchSize.setAdapter(new ArrayAdapter<>(getContext(),
                 android.R.layout.simple_dropdown_item_1line, mSizes));
+        searchColor.setAdapter(new ArrayAdapter<>(getContext(),
+                android.R.layout.simple_dropdown_item_1line, mColors));
         searchConstruction.setAdapter(new ArrayAdapter<>(getContext(),
                 android.R.layout.simple_dropdown_item_1line, mConstructions));
         searchConstrType.setAdapter(new ArrayAdapter<>(getContext(),
                 android.R.layout.simple_dropdown_item_1line, mConstructionTypes));
         FloatingActionButton fabFind = (FloatingActionButton) view.findViewById(R.id.fab_search);
-        fabFind.setOnClickListener(getFabClickListener(searchModel, searchSize, searchConstruction, searchConstrType));
+        fabFind.setOnClickListener(getFabClickListener(searchModel, searchSize, searchColor,
+                searchConstruction, searchConstrType));
+        mToolbarParentView.findViewById(R.id.iv_toolbar_option).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchModel.setText("");
+                searchSize.setSelection(0);
+                searchConstruction.setSelection(0);
+                searchColor.setSelection(0);
+                searchConstrType.setSelection(0);
+                mFindAdapter.removeData();
+            }
+        });
         findRv.setAdapter(this.mFindAdapter);
         return view;
     }
 
     @Override
     public void onDestroyView() {
+        MainActivity.ToolbarManager.getToolbarManager().removeView(mToolbarParentView);
         super.onDestroyView();
-        MainActivity.ToolbarManager.getToolbarManager().removeView(mToolbarTv);
     }
 
     @Override
@@ -134,53 +154,55 @@ public class SearchFragment extends Fragment {
     }
 
     private void setupToolbarTv() {
-        mToolbarTv = new TextView(getContext());
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.gravity = Gravity.CENTER_VERTICAL;
-        mToolbarTv.setLayoutParams(params);
-        mToolbarTv.setText(R.string.app_name);
+        mToolbarParentView = LayoutInflater.from(getContext())
+                .inflate(R.layout.view_toolbar_search, MainActivity.ToolbarManager.getToolbarManager().getToolbarLayout(), false);
+        ((TextView) mToolbarParentView.findViewById(R.id.tv_toolbar_txt)).setText(R.string.app_name);
     }
 
     private void closeKeyboard(Activity activity) {
         if (null != activity && null != activity.getCurrentFocus()) {
             InputMethodManager mInputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
             if (null != mInputMethodManager) {
-                mInputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                mInputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(),
+                        InputMethodManager.HIDE_NOT_ALWAYS);
             }
         }
     }
 
-    public View.OnClickListener getFabClickListener(final EditText searchModel,
-                                                    final Spinner size, final Spinner construction, final Spinner constr_type) {
+    public View.OnClickListener getFabClickListener(final EditText searchModel, final Spinner size,
+                                                    final Spinner color, final Spinner construction,
+                                                    final Spinner constr_type) {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 closeKeyboard(getActivity());
-                if (!checkedFindInfo(searchModel.getText().toString(), size, construction, constr_type)) {
+                if (!checkedFindInfo(searchModel.getText().toString(), size, color, construction, constr_type)) {
                     showErrorMessage(v);
                     return;
                 }
                 showProgressBar();
                 final String modelString = searchModel.getText().toString();
                 String sizeString = size.getSelectedItemPosition() == 0 ? "" : size.getSelectedItem().toString();
+                String colorString = color.getSelectedItemPosition() == 0 ? "" : color.getSelectedItem().toString();
                 String constructionString = construction.getSelectedItemPosition() == 0 ?
                         "" : construction.getSelectedItem().toString();
                 String constr_typeString = constr_type.getSelectedItemPosition() == 0 ?
                         "" : constr_type.getSelectedItem().toString();
-                RealmQuery<ModelIrrhDb> irrhQuery = buidModelIrrhQuery(mRealm, sizeString, constructionString, constr_typeString);
-                final RealmResults<ModelIrrhDb> modelIrrhs = irrhQuery.distinctAsync("model");
-                modelIrrhs.addChangeListener(new RealmChangeListener<RealmResults<ModelIrrhDb>>() {
+                RealmQuery<ProductsParamsDb> prodParamsQuery = buildProdParamsQuery(mRealm, sizeString, colorString,
+                        constructionString, constr_typeString);
+                final RealmResults<ProductsParamsDb> productsParams = prodParamsQuery
+                        .distinctAsync(ProductsParamsDb.COLUMN_MODEL);
+                productsParams.addChangeListener(new RealmChangeListener<RealmResults<ProductsParamsDb>>() {
                     @Override
-                    public void onChange(RealmResults<ModelIrrhDb> element) {
-                        String[] irrhStrings = convertRealmResultToStringArray(modelIrrhs);
+                    public void onChange(RealmResults<ProductsParamsDb> element) {
+                        String[] irrhStrings = convertRealmResultToStringArray(productsParams);
                         RealmQuery<ProductDb> productQuery = buildProductQuery(mRealm, modelString, irrhStrings);
                         final RealmResults<ProductDb> products = productQuery.findAllAsync();
                         products.addChangeListener(new RealmChangeListener<RealmResults<ProductDb>>() {
                             @Override
                             public void onChange(RealmResults<ProductDb> element) {
                                 if(products.size() != 0) {
-                                    mFindAdapter.changeData(products.sort("Article"));
+                                    mFindAdapter.changeData(products.sort(ProductDb.COLUMN_ARTICLE));
                                     showMsgs("Найдено " + String.valueOf(products.size()) + ".");
                                 }
                                 else {
@@ -190,7 +212,7 @@ public class SearchFragment extends Fragment {
                                 products.removeAllChangeListeners();
                             }
                         });
-                        modelIrrhs.removeAllChangeListeners();
+                        productsParams.removeAllChangeListeners();
                     }
                 });
 
@@ -198,10 +220,10 @@ public class SearchFragment extends Fragment {
         };
     }
 
-    private boolean checkedFindInfo(String searchModel, Spinner size, Spinner construction, Spinner constr_type) {
+    private boolean checkedFindInfo(String searchModel, Spinner size, Spinner color, Spinner construction, Spinner constr_type) {
         if (searchModel.equals("") || searchModel.equals(" ")) {
-            if (size.getSelectedItemPosition() == 0 && construction.getSelectedItemPosition() == 0
-                    && constr_type.getSelectedItemPosition() == 0) {
+            if (size.getSelectedItemPosition() == 0 && color.getSelectedItemPosition() == 0 &&
+                    construction.getSelectedItemPosition() == 0 && constr_type.getSelectedItemPosition() == 0) {
                 return false;
             }
         }
@@ -231,83 +253,50 @@ public class SearchFragment extends Fragment {
         Snackbar.make(mContainerCl, msg, Snackbar.LENGTH_SHORT).show();
     }
 
-    private static RealmQuery<ModelIrrhDb> buidModelIrrhQuery(Realm realm,
-                                                       String sizeString, String constructionString, String constr_typeString) {
-        RealmQuery<ModelIrrhDb> irrhQuery = realm.where(ModelIrrhDb.class);
+    private static RealmQuery<ProductsParamsDb> buildProdParamsQuery(Realm realm, String sizeString, String colorSring,
+                                                                     String constructionString, String constrTypeString) {
+        RealmQuery<ProductsParamsDb> paramsQuery = realm.where(ProductsParamsDb.class);
         if (!sizeString.equals("")) {
-            irrhQuery = irrhQuery.equalTo("size", sizeString);
+            int sizeId = realm.where(SizesDb.class).equalTo(SizesDb.COLUMN_SIZE, sizeString).findFirst().getId();
+            paramsQuery = paramsQuery.equalTo(ProductsParamsDb.COLUMN_SIZE_ID, sizeId);
+        }
+        if (!colorSring.equals("")) {
+            int colorId = realm.where(ColorsDb.class).equalTo(ColorsDb.COLUMN_COLOR, colorSring)
+                    .findFirst().getId();
+            paramsQuery.equalTo(ProductsParamsDb.COLUMN_COLOR_ID, colorId);
         }
         if (!constructionString.equals("")) {
-            irrhQuery = irrhQuery.equalTo("construction", constructionString);
+            int constructionId = realm.where(ConstructionsDb.class)
+                    .equalTo(ConstructionsDb.COLUMN_CONSTRUCTION, constructionString).findFirst().getId();
+            paramsQuery = paramsQuery.equalTo(ProductsParamsDb.COLUMN_CONSTRUCTION_ID, constructionId);
         }
-        if (!constr_typeString.equals("")) {
-            irrhQuery = irrhQuery.equalTo("construction_type", constr_typeString);
+        if (!constrTypeString.equals("")) {
+            int constrTypeId = realm.where(ConstructionTypesDb.class)
+                    .equalTo(ConstructionTypesDb.COLUMN_CONSTRUCTION_TYPE, constrTypeString).findFirst().getId();
+            paramsQuery = paramsQuery.equalTo(ProductsParamsDb.COLUMN_CONSTRUCTION_TYPE_ID, constrTypeId);
         }
-        return irrhQuery;
+        return paramsQuery;
     }
 
     private static RealmQuery<ProductDb> buildProductQuery(Realm realm, String modelString, String[] irrhStrings) {
         RealmQuery<ProductDb> productQuery = realm.where(ProductDb.class);
         if (!modelString.equals("")) {
-            productQuery.contains("Article", modelString);
+            productQuery.contains(ProductDb.COLUMN_ARTICLE, modelString);
         }
-        productQuery = productQuery.in("Article", irrhStrings);
+        productQuery = productQuery.in(ProductDb.COLUMN_ARTICLE, irrhStrings);
         return productQuery;
     }
 
-    private static String[] convertRealmResultToStringArray(RealmResults<ModelIrrhDb> modelIrrhs) {
-        String[] irrhStrings ;
-        if (modelIrrhs.size() != 0) {
-            irrhStrings = new String[modelIrrhs.size()];
-            for (int i = 0; i < modelIrrhs.size(); i++) {
-                irrhStrings[i] = String.valueOf(modelIrrhs.get(i).getModel());
+    private static String[] convertRealmResultToStringArray(RealmResults<ProductsParamsDb> productsParamsDbs) {
+        String[] paramsStrings;
+        if (productsParamsDbs.size() != 0) {
+            paramsStrings = new String[productsParamsDbs.size()];
+            for (int i = 0; i < productsParamsDbs.size(); i++) {
+                paramsStrings[i] = String.valueOf(productsParamsDbs.get(i).getModel());
             }
+        } else {
+            paramsStrings = new String[]{""};
         }
-        else {
-            irrhStrings = new String[]{""};
-        }
-        return irrhStrings;
-    }
-
-    private class OnClickAsync extends AsyncTask<Object, Object, RealmList<ProductDb>> {
-        private String modelString;
-        private String sizeString;
-        private String constructionString;
-        private String constr_typeString;
-
-        public OnClickAsync(String modelString, String sizeString, String constructionString, String constr_typeString) {
-            this.modelString = modelString;
-            this.sizeString = sizeString;
-            this.constructionString = constructionString;
-            this.constr_typeString = constr_typeString;
-        }
-
-        @Override
-        protected RealmList<ProductDb> doInBackground(Object... params) {
-            Realm realm = Realm.getDefaultInstance();
-            RealmQuery<ModelIrrhDb> irrhQuery =
-                    buidModelIrrhQuery(realm, sizeString, constructionString, constr_typeString);
-            RealmResults<ModelIrrhDb> modelIrrhs = irrhQuery.distinct("model");
-            String[] irrhStrings = convertRealmResultToStringArray(modelIrrhs);
-            RealmQuery<ProductDb> productQuery = buildProductQuery(realm, modelString, irrhStrings);
-            RealmResults<ProductDb> products = productQuery.findAll();
-            RealmList<ProductDb> result = new RealmList<>();
-            for (ProductDb productDb : products) {
-                result.add(productDb);
-            }
-            return result;
-        }
-
-        @Override
-        protected void onPostExecute(RealmList<ProductDb> products) {
-            if(products.size() != 0) {
-                mFindAdapter.changeData(products.sort("Article"));
-                showMsgs("Найдено " + String.valueOf(products.size()) + ".");
-            }
-            else {
-                showMsgs("Ниего не найдено ;(");
-                mFindAdapter.changeData(null);
-            }
-        }
+        return paramsStrings;
     }
 }

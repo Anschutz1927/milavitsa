@@ -8,6 +8,9 @@ import io.realm.annotations.Index;
  */
 
 public class SizesDb extends RealmObject {
+    public static final String COLUMN_ID = "id";
+    public static final String COLUMN_SIZE = "size";
+
     @Index
     private int id;
     private String size;

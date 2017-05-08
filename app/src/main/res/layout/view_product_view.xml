@@ -12,12 +12,12 @@
         android:layout_weight="1">
 
         <ImageView
+            android:id="@+id/view_product_view_imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:srcCompat="@drawable/ic_menu_camera"
-            android:id="@+id/view_product_view_imageView"
             android:adjustViewBounds="true"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitCenter"
+            app:srcCompat="@color/cardview_light_background" />
 
     </android.support.v7.widget.CardView>
 
@@ -29,58 +29,76 @@
         android:layout_weight="0">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="bottom">
+            android:gravity="bottom"
+            android:orientation="vertical">
 
             <TextView
-                android:text="desc"
+                android:id="@+id/view_product_view_descTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/view_product_view_descTextView"
-                android:textStyle="normal|italic"
+                android:layout_margin="5dp"
+                android:text="desc"
                 android:textColor="@android:color/background_dark"
-                android:layout_margin="5dp" />
+                android:textStyle="normal|italic" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <Spinner
-                    android:id="@+id/spnr_size"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1" />
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/view_colors_view_imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
+                    <Spinner
+                        android:id="@+id/spnr_size"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:id="@+id/view_colors_view_imageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="0"
+                        android:visibility="gone"
+                        app:srcCompat="@android:drawable/ic_menu_camera" />
+
+                    <Spinner
+                        android:id="@+id/spnr_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab_order"
+                    android:layout_width="92dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="5dp"
                     android:layout_weight="0"
-                    app:srcCompat="@android:drawable/ic_menu_camera" />
+                    android:clickable="true"
+                    app:backgroundTint="@android:color/transparent"
+                    app:rippleColor="#ff3700"
+                    app:srcCompat="@drawable/order1" />
 
             </LinearLayout>
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab_order"
-                android:layout_width="92dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_marginBottom="5dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginRight="15dp"
-                android:clickable="true"
-                app:backgroundTint="@android:color/transparent"
-                app:fabSize="normal"
-                app:srcCompat="@drawable/order1" />
 
         </LinearLayout>
 

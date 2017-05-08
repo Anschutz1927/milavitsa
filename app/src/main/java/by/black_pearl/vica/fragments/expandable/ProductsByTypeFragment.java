@@ -64,7 +64,7 @@ public class ProductsByTypeFragment extends Fragment {
             mId = getArguments().getInt(ID);
         }
         mRealm = Realm.getDefaultInstance();
-        mMenuId = mRealm.where(ProductSeriesDb.class).equalTo("Id", mId).findFirst().getIdMenu();
+        mMenuId = mRealm.where(ProductSeriesDb.class).equalTo(ProductSeriesDb.COLUMN_ID, mId).findFirst().getId_menu();
         loadProducts(mId);
     }
 
@@ -113,14 +113,13 @@ public class ProductsByTypeFragment extends Fragment {
     }
 
     private void loadSpinner() {
-        //this.mSpinner = new Spinner(getContext());
         this.mSpinner = new Spinner(MainActivity.ToolbarManager.getToolbarManager().getThemedContext());
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
         params.gravity = Gravity.RIGHT;
         params.setMargins(0, 0, 0, 10);
         this.mSpinner.setLayoutParams(params);
-        MainActivity.ToolbarManager.getToolbarManager().addView(mSpinner);
+        MainActivity.ToolbarManager.getToolbarManager().setView(mSpinner);
         SeriesSpinnerAdapter adapter = new SeriesSpinnerAdapter(getContext(), mMenuId);
         this.mSpinner.setAdapter(adapter);
         this.mSpinner.setSelection(adapter.getCurrentPosition(mId));
@@ -162,7 +161,7 @@ public class ProductsByTypeFragment extends Fragment {
         int posType1 = 0;
         int posType3 = 0;
         int posType4 = 0;
-        RealmResults<ProductDb> products = mRealm.where(ProductDb.class).equalTo("IdRubric", id).findAll();
+        RealmResults<ProductDb> products = mRealm.where(ProductDb.class).equalTo(ProductDb.COLUMN_ID_RUBRIC, id).findAll();
         for (ProductDb product : products) {
             switch (product.getType()) {
                 case 1:

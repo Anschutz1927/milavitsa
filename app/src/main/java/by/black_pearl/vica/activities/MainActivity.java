@@ -1,10 +1,13 @@
 package by.black_pearl.vica.activities;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -16,26 +19,26 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.backendless.Backendless;
 
-import java.io.File;
-import java.util.Calendar;
-
 import by.black_pearl.vica.R;
-import by.black_pearl.vica.WinRarFileWorker;
+import by.black_pearl.vica.fragments.addresses.AddressesFragment;
 import by.black_pearl.vica.fragments.expandable.ExpandableCollectionsFragment;
 import by.black_pearl.vica.fragments.search.SearchFragment;
 import by.black_pearl.vica.fragments.updater.UpgradeFragment;
-import by.black_pearl.vica.realm_db.CollectionDb;
+import by.black_pearl.vica.realm_db.CollectionsDb;
 import io.realm.Realm;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Realm mRealm;
     private static final String sBackendlessAppId = "C68F0999-9946-4158-FF9F-D3E41DCBFD00";
     private static final String sBackendlessKey = "AE240C33-A9D3-AA40-FF5C-ED1B88588700";
+    private static final int PERMISSIONS_REQUEST_CODE = 0;
+
+    private Realm mRealm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +50,6 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        //drawer.setDrawerListener(toggle);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -57,13 +59,8 @@ public class MainActivity extends AppCompatActivity
         initialization();
         if (savedInstanceState == null) {
             mRealm = Realm.getDefaultInstance();
-            if (mRealm.where(CollectionDb.class).findAll().size() > 0) {
-                //if(fileUpdateIsOld()) {
-                //    FragmentChanger.getFragmentChanger().addFragmentOnStart(OstDownloaderFragment.newInstance());
-                // }
-                //else {
+            if (mRealm.where(CollectionsDb.class).count() > 0) {
                 FragmentChanger.getFragmentChanger().addFragmentOnStart(ExpandableCollectionsFragment.newInstance());
-                //}
             } else {
                 FragmentChanger.getFragmentChanger().addFragmentOnStart(UpgradeFragment.newInstance());
             }
@@ -77,24 +74,6 @@ public class MainActivity extends AppCompatActivity
         Context themedContext = getSupportActionBar().getThemedContext() != null ?
                 getSupportActionBar().getThemedContext() : getBaseContext();
         ToolbarManager.init(themedContext, (Toolbar) findViewById(R.id.toolbar));
-    }
-
-    private boolean fileUpdateIsOld() {
-        File unraredFile = WinRarFileWorker.getUnraredXlsFile(getCacheDir(), null);
-        if(unraredFile != null) {
-            int year = 2;
-            int month = 1;
-            int day = 0;
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(System.currentTimeMillis());
-            int[] todayDdMmYyyy = {calendar.get(Calendar.DATE), calendar.get(Calendar.MONTH), calendar.get(Calendar.YEAR)};
-            calendar.setTimeInMillis(unraredFile.lastModified());
-            int[] fileDdMmYyyy = {calendar.get(Calendar.DATE), calendar.get(Calendar.MONTH), calendar.get(Calendar.YEAR)};
-            return todayDdMmYyyy[year] > fileDdMmYyyy[year] ||
-                    todayDdMmYyyy[month] > fileDdMmYyyy[month] ||
-                    todayDdMmYyyy[day] > fileDdMmYyyy[day];
-        }
-        return true;
     }
 
     @Override
@@ -116,7 +95,10 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        if (FragmentChanger.getFragmentChanger().isUpgradeFragment()) {
+            Toast.makeText(this, "Пожалуйста, подождите окончания загрузки!", Toast.LENGTH_LONG).show();
+            return true;
+        }
         switch (item.getItemId()) {
             case R.id.nav_start_download:
                 FragmentChanger.getFragmentChanger().addFragmentOnStart(UpgradeFragment.newInstance());
@@ -131,15 +113,41 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_slide_show:
                 startActivity(new Intent(this, SlideshowActivity.class));
                 break;
+            case R.id.nav_addresses:
+                if (!isPremissionsAllowed()) {
+                    Toast.makeText(this, "Нет доступа к местоположению или права на использование " +
+                            "местоположения не предоставлены!", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+                FragmentChanger.getFragmentChanger().clearBackStack();
+                FragmentChanger.getFragmentChanger().changeFragment(AddressesFragment.newInstance(), true);
+                break;
             case R.id.nav_settings:
                 //startActivity(new Intent(this, SettingsActivity.class));
                 startActivity(new Intent(this, TempSettingsActivity.class));
                 break;
         }
-        fragmentTransaction.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    private boolean isPremissionsAllowed() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
+                        PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    this,
+                    new String[] {
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,
+                    },
+                    PERMISSIONS_REQUEST_CODE
+            );
+            return false;
+        }
         return true;
     }
 
@@ -156,10 +164,12 @@ public class MainActivity extends AppCompatActivity
         public void addFragmentOnStart(Fragment startFragment) {
             if(mStartFragment != null) {
                 clearBackStack();
-                mManager.beginTransaction().remove(mStartFragment).commit();
+                //mManager.beginTransaction().remove(mStartFragment).commit();
+                mManager.beginTransaction().remove(mStartFragment).commitAllowingStateLoss();
             }
             this.mStartFragment = startFragment;
-            mManager.beginTransaction().add(R.id.content_main, startFragment).commit();
+            //mManager.beginTransaction().add(R.id.content_main, startFragment).commit();
+            mManager.beginTransaction().add(R.id.content_main, startFragment).commitAllowingStateLoss();
         }
 
         public void changeFragment(Fragment fragment, boolean addToBackStack) {
@@ -171,11 +181,15 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.commit();
         }
 
-        private void clearBackStack() {
+        public void clearBackStack() {
             int n = mManager.getBackStackEntryCount();
             for (int i = 0; i < n; i++) {
                 mManager.popBackStackImmediate();
             }
+        }
+
+        boolean isUpgradeFragment() {
+            return mStartFragment.getClass().getName() == UpgradeFragment.class.getName();
         }
 
         private static void init(FragmentManager supportFragmentManager) {
@@ -197,7 +211,10 @@ public class MainActivity extends AppCompatActivity
             mContext = themedContext;
         }
 
-        public void addView(View view) {
+        public void setView(View view) {
+            if (mToolbarLayout.getChildCount() != 0) {
+                mToolbarLayout.removeAllViews();
+            }
             mToolbarLayout.addView(view);
         }
 
@@ -219,6 +236,10 @@ public class MainActivity extends AppCompatActivity
 
         public void removeViews() {
             mToolbarLayout.removeAllViews();
+        }
+
+        public FrameLayout getToolbarLayout() {
+            return mToolbarLayout;
         }
     }
 }

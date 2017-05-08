@@ -23,7 +23,7 @@ public class SeriesSpinnerAdapter implements android.widget.SpinnerAdapter {
     public SeriesSpinnerAdapter(Context context, int id) {
         mContext = context;
         Realm realm = Realm.getDefaultInstance();
-        mSeries = realm.where(ProductSeriesDb.class).equalTo("IdMenu", id).findAll();
+        mSeries = realm.where(ProductSeriesDb.class).equalTo(ProductSeriesDb.COLUMN_ID_MENU, id).findAll();
     }
 
     public int getCurrentPosition(int id) {

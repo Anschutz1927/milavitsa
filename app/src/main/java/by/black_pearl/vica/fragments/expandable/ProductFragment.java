@@ -1,11 +1,15 @@
 package by.black_pearl.vica.fragments.expandable;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,13 +31,14 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import by.black_pearl.vica.R;
 import by.black_pearl.vica.activities.FullscreenImageActivity;
 import by.black_pearl.vica.activities.TempSettingsActivity;
-import by.black_pearl.vica.realm_db.ModelIrrhDb;
 import by.black_pearl.vica.realm_db.ProductDb;
+import by.black_pearl.vica.realm_db.ProductsParamsDb;
 import io.realm.Realm;
 
 /**
@@ -43,6 +48,7 @@ import io.realm.Realm;
  */
 public class ProductFragment extends Fragment {
     private final static String sNotificSizes = "Размеры";
+    private final static String sNotificColors = "Цвет";
 
     private static final String ID = "mId";
     private ProductDb mProduct;
@@ -71,7 +77,7 @@ public class ProductFragment extends Fragment {
         if(getArguments() != null) {
             mId = getArguments().getInt(ID);
         }
-        this.mProduct = realm.where(ProductDb.class).equalTo("Id", mId).findFirst();
+        this.mProduct = realm.where(ProductDb.class).equalTo(ProductDb.COLUMN_ID, mId).findFirst();
     }
 
     @Override
@@ -89,7 +95,7 @@ public class ProductFragment extends Fragment {
                 .fitCenter().placeholder(android.R.drawable.ic_menu_camera)
                 .crossFade().into(imageView);
         ImageView colorsView = (ImageView) view.findViewById(R.id.view_colors_view_imageView);
-        String colors_url = "http://www.milavitsa.com/i/photo/" + mProduct.getCustomMatherial();
+        String colors_url = "http://www.milavitsa.com/i/photo/" + mProduct.getCustom_matherial();
         Glide.with(getContext()).load(colors_url).diskCacheStrategy(DiskCacheStrategy.RESULT)
                 .fitCenter().placeholder(android.R.drawable.ic_menu_camera)
                 .crossFade().into(colorsView);
@@ -101,16 +107,32 @@ public class ProductFragment extends Fragment {
             }
         });
         ArrayAdapter sizeSpnrAdapter = getSizesAdapter(mProduct.getArticle());
+        final ArrayAdapter colorSpnrAdapter = getColorAdapter(mProduct.getArticle());
         Spinner sizesSpnr = (Spinner) view.findViewById(R.id.spnr_size);
         sizesSpnr.setAdapter(sizeSpnrAdapter);
+        Spinner colorSpnr = (Spinner) view.findViewById(R.id.spnr_color);
+        colorSpnr.setAdapter(colorSpnrAdapter);
         String modelOrder = "Model: " + mProduct.getArticle() + "\n";
-        view.findViewById(R.id.fab_order).setOnClickListener(getOrderOnClockListener(sizesSpnr, modelOrder));
+        /*Callback callback = new Callback() {
+            @Override
+            public void onCallback() {
+                colorSpnr.setEnabled(false);
+                colorSpnr.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        colorSpnrAdapter.set;
+                        colorSpnr.setEnabled(true);
+                    }
+                });
+            }
+        };*/
+        view.findViewById(R.id.fab_order).setOnClickListener(getOrderOnClockListener(sizesSpnr, colorSpnr, modelOrder));
         return view;
     }
 
 
     public ArrayAdapter getSizesAdapter(String article) {
-        ArrayList<String> sizesList = ModelIrrhDb.getItemSizesList(Realm.getDefaultInstance(), Integer.parseInt(article));
+        ArrayList<String> sizesList = ProductsParamsDb.getItemSizesList(Realm.getDefaultInstance(), Integer.parseInt(article));
         if (sizesList == null) {
             sizesList = new ArrayList<>();
         }
@@ -118,7 +140,18 @@ public class ProductFragment extends Fragment {
         return new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, sizesList);
     }
 
-    public View.OnClickListener getOrderOnClockListener(final Spinner sizesSpnr, final String modelOrder) {
+    private ArrayAdapter getColorAdapter(String article) {
+        ArrayList<String> colorsList = ProductsParamsDb
+                .getItemColorsList(Realm.getDefaultInstance(), Integer.parseInt(article));
+        if (colorsList == null) {
+            colorsList = new ArrayList<>();
+        }
+        colorsList.add(0, sNotificColors);
+        return new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, colorsList);
+    }
+
+    public View.OnClickListener getOrderOnClockListener(final Spinner sizesSpnr,
+                                                        final Spinner colorSpnr, final String modelOrder) {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,7 +166,12 @@ public class ProductFragment extends Fragment {
                     Toast.makeText(getContext().getApplicationContext(), "Не задан размер.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                String order = modelOrder + "Size: " + sizesSpnr.getSelectedItem().toString() + "\n";
+                if (colorSpnr.getSelectedItem().toString().equals(sNotificColors)) {
+                    Toast.makeText(getContext().getApplicationContext(), "Не задан цвет.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                String order = modelOrder + "Size: " + sizesSpnr.getSelectedItem().toString() + "\n" +
+                        "Color: " + colorSpnr.getSelectedItem().toString() + "\n";
                 emailDialog(mailTo, order);
             }
         };
@@ -191,5 +229,36 @@ public class ProductFragment extends Fragment {
                 Toast.makeText(getContext(), "Ошибка, заявка не отправлена!", Toast.LENGTH_SHORT).show();
             }
         };
+    }
+
+    private class SpinnerDropDownAdapter extends ArrayAdapter<String> {
+
+        public SpinnerDropDownAdapter(@NonNull Context context, @LayoutRes int resource) {
+            super(context, resource);
+        }
+
+        public SpinnerDropDownAdapter(@NonNull Context context, @LayoutRes int resource, @IdRes int textViewResourceId) {
+            super(context, resource, textViewResourceId);
+        }
+
+        public SpinnerDropDownAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull String[] objects) {
+            super(context, resource, objects);
+        }
+
+        public SpinnerDropDownAdapter(@NonNull Context context, @LayoutRes int resource, @IdRes int textViewResourceId, @NonNull String[] objects) {
+            super(context, resource, textViewResourceId, objects);
+        }
+
+        public SpinnerDropDownAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<String> objects) {
+            super(context, resource, objects);
+        }
+
+        public SpinnerDropDownAdapter(@NonNull Context context, @LayoutRes int resource, @IdRes int textViewResourceId, @NonNull List<String> objects) {
+            super(context, resource, textViewResourceId, objects);
+        }
+    }
+
+    public interface Callback {
+        void onCallback();
     }
 }

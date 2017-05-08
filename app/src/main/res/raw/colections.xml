@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<collections>
+
+    <collection
+        name="Классика"
+        image="catalog/classic/t/r_classika_razdel_1_2017_577x386.png"
+        menuId = "55"/>
+    <collection
+        name="Купальники"
+        image="catalog/swimsuit/t/t/r_kartinka_k_razdelu_577x386.png"
+        menuId = "56" />
+    <collection
+        name="Модная коллекция"
+        image="catalog/moda/t/r_imperiya_chuvstv_785_524_577x386.png"
+        menuId = "54" />
+
+    <collection
+        name="Трикотажная коллекция"
+        image="tricotazh/t/r_k_razdelu_577x386.png"
+        menuId = "83" />
+
+</collections>

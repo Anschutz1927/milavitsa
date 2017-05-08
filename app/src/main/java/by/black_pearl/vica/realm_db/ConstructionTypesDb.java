@@ -8,17 +8,20 @@ import io.realm.annotations.Index;
  */
 
 public class ConstructionTypesDb extends RealmObject {
+    public static final String COLUMN_ID = "id";
+    public static final String COLUMN_CONSTRUCTION_TYPE = "construction_type";
+
     @Index
     private int id;
-    private String constructionType;
+    private String construction_type;
 
     public ConstructionTypesDb setConstructionTypeParam(String constructionTypeParam) {
-        this.constructionType = constructionTypeParam;
+        this.construction_type = constructionTypeParam;
         return this;
     }
 
-    public String getConstructionType() {
-        return constructionType;
+    public String getConstruction_type() {
+        return construction_type;
     }
 
     public int getId() {

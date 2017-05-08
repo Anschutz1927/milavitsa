@@ -20,11 +20,11 @@ public class ScrollProductAdapter extends FragmentPagerAdapter {
         super(fragmentManager);
         this.mId = mId;
         Realm realm = Realm.getDefaultInstance();
-        ProductDb mProduct = realm.where(ProductDb.class).equalTo("Id", mId).findFirst();
+        ProductDb mProduct = realm.where(ProductDb.class).equalTo(ProductDb.COLUMN_ID, mId).findFirst();
         if(mProduct == null) {
             return;
         }
-        this.mProducts = realm.where(ProductDb.class).equalTo("IdRubric", mProduct.getIdRubric()).findAll();
+        this.mProducts = realm.where(ProductDb.class).equalTo(ProductDb.COLUMN_ID_RUBRIC, mProduct.getId_rubric()).findAll();
     }
 
     @Override

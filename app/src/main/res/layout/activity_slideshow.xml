@@ -7,10 +7,6 @@
     app:layout_gravity="center"
     tools:context="by.black_pearl.vica.activities.SlideshowActivity">
 
-    <!-- The primary full-screen view. This can be replaced with whatever view
-         is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc. -->
-
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
 
@@ -25,7 +21,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
-            app:srcCompat="@drawable/ic_menu_camera" />
+            app:srcCompat="@color/transparent" />
 
         <ImageView
             android:id="@+id/activity_slideshow_image1"
@@ -33,7 +29,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
-            app:srcCompat="@drawable/ic_menu_camera" />
+            app:srcCompat="@color/transparent" />
     </ImageSwitcher>
 
     <FrameLayout

@@ -71,7 +71,7 @@ public class ExpandableCollectionsFragment extends Fragment {
         params.gravity = Gravity.CENTER_VERTICAL;
         mToolbarNameTextView.setLayoutParams(params);
         mToolbarNameTextView.setText(R.string.app_name);
-        MainActivity.ToolbarManager.getToolbarManager().addView(mToolbarNameTextView);
+        MainActivity.ToolbarManager.getToolbarManager().setView(mToolbarNameTextView);
     }
 
 }

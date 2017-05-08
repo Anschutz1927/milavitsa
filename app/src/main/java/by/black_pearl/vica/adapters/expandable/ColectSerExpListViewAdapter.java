@@ -18,7 +18,7 @@ import java.util.HashMap;
 import by.black_pearl.vica.R;
 import by.black_pearl.vica.activities.MainActivity;
 import by.black_pearl.vica.fragments.expandable.ProductsByTypeFragment;
-import by.black_pearl.vica.realm_db.CollectionDb;
+import by.black_pearl.vica.realm_db.CollectionsDb;
 import by.black_pearl.vica.realm_db.ProductDb;
 import by.black_pearl.vica.realm_db.ProductSeriesDb;
 import io.realm.Realm;
@@ -29,8 +29,8 @@ import io.realm.RealmResults;
  */
 public class ColectSerExpListViewAdapter extends BaseExpandableListAdapter {
 
-    private final RealmResults<CollectionDb> mContentCollections;
-    private final HashMap<CollectionDb, RealmResults<ProductSeriesDb>> mContentSeriesMap;
+    private final RealmResults<CollectionsDb> mContentCollections;
+    private final HashMap<CollectionsDb, RealmResults<ProductSeriesDb>> mContentSeriesMap;
     private final Context mContext;
 
     public ColectSerExpListViewAdapter(Context context) {
@@ -38,7 +38,7 @@ public class ColectSerExpListViewAdapter extends BaseExpandableListAdapter {
         mContentSeriesMap = new HashMap<>();
 
         Realm realm = Realm.getDefaultInstance();
-        mContentCollections = realm.where(CollectionDb.class).findAll();
+        mContentCollections = realm.where(CollectionsDb.class).findAll();
 
         fillContentSeriesMap(realm);
 
@@ -49,7 +49,7 @@ public class ColectSerExpListViewAdapter extends BaseExpandableListAdapter {
         for(int i = 0; i < mContentCollections.size(); i++) {
             int menuId = mContentCollections.get(i).getMenuId();
             RealmResults<ProductSeriesDb> contentSeriesList =
-                    realm.where(ProductSeriesDb.class).equalTo("IdMenu", menuId).findAll();
+                    realm.where(ProductSeriesDb.class).equalTo(ProductSeriesDb.COLUMN_ID_MENU, menuId).findAll();
             mContentSeriesMap.put(mContentCollections.get(i), contentSeriesList);
         }
     }
@@ -160,8 +160,10 @@ public class ColectSerExpListViewAdapter extends BaseExpandableListAdapter {
                                     public void onClick(DialogInterface dialog, int which) {
                                         Realm realm = Realm.getDefaultInstance();
                                         realm.beginTransaction();
-                                        realm.where(ProductDb.class).equalTo("IdRubric", id).findAll().deleteAllFromRealm();
-                                        realm.where(ProductSeriesDb.class).equalTo("Id", id).findAll().deleteAllFromRealm();
+                                        realm.where(ProductDb.class).equalTo(ProductDb.COLUMN_ID_RUBRIC, id)
+                                                .findAll().deleteAllFromRealm();
+                                        realm.where(ProductSeriesDb.class).equalTo(ProductSeriesDb.COLUMN_ID, id)
+                                                .findAll().deleteAllFromRealm();
                                         realm.commitTransaction();
                                         fillContentSeriesMap(realm);
                                         notifyDataSetChanged();

@@ -7,97 +7,108 @@ import io.realm.RealmObject;
  */
 
 public class ProductDb extends RealmObject {
-    private int Id;
-    private int IdRubric;
-    private String Article;
-    private String Image;
-    private String ImageBackward;
-    private String Description;
-    private String Sizes;
-    private int Type;
-    private int Sort;
-    private String CustomMatherial;
+    public static final String COLUMN_ID = "id";
+    public static final String COLUMN_ID_RUBRIC = "id_rubric";
+    public static final String COLUMN_ARTICLE = "article";
+    public static final String COLUMN_IMAGE = "image";
+    public static final String COLUMN_IMAGE_BACKWARD = "image_backward";
+    public static final String COLUMN_DESCRIPTION = "description";
+    public static final String COLUMN_SIZES = "sizes";
+    public static final String COLUMN_TYPE = "type";
+    public static final String COLUMN_SORT = "sort";
+    public static final String COLUMN_CUSTOM_MATHERIAL = "custom_matherial";
+
+    private int id;
+    private int id_rubric;
+    private String article;
+    private String image;
+    private String image_backward;
+    private String description;
+    private String sizes;
+    private int type;
+    private int sort;
+    private String custom_matherial;
 
     public ProductDb() {
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
-    public int getIdRubric() {
-        return IdRubric;
+    public int getId_rubric() {
+        return id_rubric;
     }
 
-    public void setIdRubric(int idRubric) {
-        IdRubric = idRubric;
+    public void setId_rubric(int id_rubric) {
+        this.id_rubric = id_rubric;
     }
 
     public String getArticle() {
-        return Article;
+        return article;
     }
 
     public void setArticle(String article) {
-        Article = article;
+        this.article = article;
     }
 
     public String getImage() {
-        return Image;
+        return image;
     }
 
     public void setImage(String image) {
-        Image = image;
+        this.image = image;
     }
 
-    public String getImageBackward() {
-        return ImageBackward;
+    public String getImage_backward() {
+        return image_backward;
     }
 
-    public void setImageBackward(String imageBackward) {
-        ImageBackward = imageBackward;
+    public void setImage_backward(String image_backward) {
+        this.image_backward = image_backward;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 
     public String getSizes() {
-        return Sizes;
+        return sizes;
     }
 
     public void setSizes(String sizes) {
-        Sizes = sizes;
+        this.sizes = sizes;
     }
 
     public int getType() {
-        return Type;
+        return type;
     }
 
     public void setType(int type) {
-        Type = type;
+        this.type = type;
     }
 
     public int getSort() {
-        return Sort;
+        return sort;
     }
 
     public void setSort(int sort) {
-        Sort = sort;
+        this.sort = sort;
     }
 
-    public String getCustomMatherial() {
-        return CustomMatherial;
+    public String getCustom_matherial() {
+        return custom_matherial;
     }
 
-    public void setCustomMatherial(String customMatherial) {
-        CustomMatherial = customMatherial;
+    public void setCustom_matherial(String custom_matherial) {
+        this.custom_matherial = custom_matherial;
     }
 }

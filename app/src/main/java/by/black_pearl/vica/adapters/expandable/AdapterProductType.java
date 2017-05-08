@@ -35,7 +35,7 @@ public class AdapterProductType extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         return ItemFragment.newInstance(mProducts.get(position).getId(), mProducts.get(position).getImage(),
-                mProducts.get(position).getArticle(), mProducts.get(position).getCustomMatherial());
+                mProducts.get(position).getArticle(), mProducts.get(position).getCustom_matherial());
     }
 
     @Override
@@ -94,7 +94,7 @@ public class AdapterProductType extends FragmentStatePagerAdapter {
                     .crossFade().into(imageProduct);
             article.setText(this.article);
             Glide.with(getContext()).load(colorsUrl).diskCacheStrategy(DiskCacheStrategy.RESULT)
-                    .fitCenter().placeholder(android.R.drawable.ic_menu_camera).crossFade().into(imageColors);
+                    .fitCenter().placeholder(R.color.transparent).crossFade().into(imageColors);
             view.setOnClickListener(getOnItemClickListener());
             return view;
         }

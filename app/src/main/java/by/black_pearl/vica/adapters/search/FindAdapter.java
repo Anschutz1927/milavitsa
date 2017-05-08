@@ -35,13 +35,17 @@ public class FindAdapter extends RecyclerView.Adapter<FindAdapter.Holder> {
     }
 
     public void changeData(RealmResults<ProductDb> products) {
-        int size = mProducts.size();
-        this.mProducts.clear();
-        notifyItemRangeRemoved(0, size);
+        removeData();
         if (products != null && products.size() != 0) {
             this.mProducts.addAll(products);
         }
         notifyItemRangeChanged(0, mProducts.size());
+    }
+
+    public void removeData() {
+        int size = mProducts.size();
+        this.mProducts.clear();
+        notifyItemRangeRemoved(0, size);
     }
 
     @Override

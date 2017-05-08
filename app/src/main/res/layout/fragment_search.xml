@@ -58,7 +58,19 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="25dp"
                     android:layout_marginStart="10dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:spinnerMode="dialog" />
+
+                <Spinner
+                    android:id="@+id/spnr_color"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:spinnerMode="dialog" />
 
                 <Spinner
                     android:id="@+id/spnr_constr"
@@ -68,17 +80,20 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="25dp"
                     android:layout_marginStart="10dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:spinnerMode="dialog" />
 
                 <Spinner
                     android:id="@+id/spnr_constr_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
                     android:layout_marginEnd="25dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="25dp"
                     android:layout_marginStart="10dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:spinnerMode="dialog" />
 
             </LinearLayout>
 
@@ -88,7 +103,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_find"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:scrollbars="vertical"
         app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior" />
 

@@ -3,11 +3,6 @@ package by.black_pearl.vica;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.github.junrar.extract.ExtractArchive;
-import com.github.junrar.rarfile.FileHeader;
-
-import org.apache.commons.logging.impl.SimpleLog;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,6 +10,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import okhttp3.ResponseBody;
+
+//import com.github.junrar.extract.ExtractArchive;
+//import com.github.junrar.rarfile.FileHeader;
+//import org.apache.commons.logging.impl.SimpleLog;
 
 /**
  * Created by BLACK_Pearl.
@@ -112,11 +111,11 @@ public class WinRarFileWorker {
             final File extDirectory = new File(directory, EXTRACT_DIR);
             extDirectory.mkdir();
             callback.onMessage("Prepare to unpack...");
-            ExtractArchive extractArchive = new ExtractArchive();
-            org.apache.commons.logging.Log logger = new SimpleLog("ArchiveLog::");
-            extractArchive.setLogger(logger);
+            //ExtractArchive extractArchive = new ExtractArchive();
+            //org.apache.commons.logging.Log logger = new SimpleLog("ArchiveLog::");
+            //extractArchive.setLogger(logger);
             callback.onMessage("Starting unpack...");
-            extractArchive.extractArchive(archiveFile, extDirectory);
+            //extractArchive.extractArchive(archiveFile, extDirectory);
             callback.onMessage("Unpacked!");
             return extDirectory;
         } catch (Exception e) {
@@ -126,7 +125,7 @@ public class WinRarFileWorker {
         return null;
     }
 
-    private static void createDirectory(FileHeader fileHeader, File destination) {
+    /*private static void createDirectory(FileHeader fileHeader, File destination) {
         File file;
         if(fileHeader.isDirectory() && fileHeader.isUnicode()) {
             file = new File(destination, fileHeader.getFileNameW());
@@ -140,7 +139,7 @@ public class WinRarFileWorker {
                 makeDirectory(destination, fileHeader.getFileNameString());
             }
         }
-    }
+    }*/
 
     private static void makeDirectory(File destination, String name) {
         String[] dirs = name.split("\\\\");
@@ -154,7 +153,7 @@ public class WinRarFileWorker {
         }
     }
 
-    private static File createFile(FileHeader fileHeader, File destination) {
+    /*private static File createFile(FileHeader fileHeader, File destination) {
         String name;
         if (fileHeader.isFileHeader() && fileHeader.isUnicode()) {
             name = fileHeader.getFileNameW();
@@ -172,7 +171,7 @@ public class WinRarFileWorker {
             }
         }
         return file;
-    }
+    }*/
 
     private static File makeFile(File destination, String name) {
         String[] dirs = name.split("\\\\");
