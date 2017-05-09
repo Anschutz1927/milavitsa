@@ -19,8 +19,8 @@ import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
-import by.black_pearl.vica.GpsManager;
-import by.black_pearl.vica.MapView;
+import by.black_pearl.vica.location.GpsManager;
+import by.black_pearl.vica.location.MapView;
 import by.black_pearl.vica.R;
 import by.black_pearl.vica.realm_db.ShopsCoordinatesDb;
 import by.black_pearl.vica.realm_db.ShopsParamsDb;

@@ -1,4 +1,4 @@
-package by.black_pearl.vica;
+package by.black_pearl.vica.location;
 
 import android.content.Context;
 import android.os.Handler;

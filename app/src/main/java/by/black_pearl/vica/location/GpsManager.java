@@ -1,4 +1,4 @@
-package by.black_pearl.vica;
+package by.black_pearl.vica.location;
 
 import android.Manifest;
 import android.content.Context;
@@ -21,6 +21,11 @@ import org.osmdroid.views.overlay.compass.CompassOverlay;
 import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider;
 
 import java.util.ArrayList;
+
+import by.black_pearl.vica.R;
+import by.black_pearl.vica.realm_db.ShopsCoordinatesDb;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * Created by BLACK_Pearl.
@@ -128,7 +133,38 @@ public class GpsManager implements LocationListener {
     }
 
     private void getThreeNearestShopsCoordinates(Location location) {
-
+        ArrayList<GeoPoint> threeShopGeoPoints = new ArrayList<>(3);
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ShopsCoordinatesDb> shopsCoordinatesDb =
+                realm.where(ShopsCoordinatesDb.class).findAll();
+        realm.close();
+        for (int i = 0; i < shopsCoordinatesDb.size(); i++) {
+            GeoPoint point = new GeoPoint(
+                    shopsCoordinatesDb.get(i).getLatitude(),
+                    shopsCoordinatesDb.get(i).getLongitude()
+            );
+            int distance = point.distanceTo(new GeoPoint(
+                    location.getLatitude(), location.getLongitude()
+            ));
+            for (int j = threeShopGeoPoints.size() - 1; j >= 0; j--) {
+                if (threeShopGeoPoints.get(j) == null &&
+                        j != 0 ||
+                        threeShopGeoPoints.get(j) == null &&
+                                threeShopGeoPoints.get(j - 1) != null ||
+                        new GeoPoint(
+                                threeShopGeoPoints.get(j).getLatitude(),
+                                threeShopGeoPoints.get(j).getLongitude()
+                        ).distanceTo(new GeoPoint(
+                                shopsCoordinatesDb.get(i).getLatitude(),
+                                shopsCoordinatesDb.get(i).getLongitude()
+                        )) > distance) {
+                    threeShopGeoPoints.add(j, new GeoPoint(
+                            shopsCoordinatesDb.get(i).getLatitude(),
+                            shopsCoordinatesDb.get(i).getLongitude()
+                    ));
+                }
+            }
+        }
     }
 
     @Override
@@ -137,6 +173,7 @@ public class GpsManager implements LocationListener {
             return;
         }
         setMyLocationOnMap(location);
+        putShopsOnMap(location);
     }
 
     @Override
